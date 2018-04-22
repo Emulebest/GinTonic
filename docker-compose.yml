@@ -1,0 +1,31 @@
+version: '3'
+services:
+  rust:
+    image: "rust:latest"
+    working_dir: /usr/src/myapp
+    volumes:
+      - /blockchain:/usr/src/myapp
+    command: cargo run
+
+  golang:
+    image: "golang:1.10.1-alpine3.7"
+    working_dir: /go/src/app
+    volumes:
+      - /backend_go:/go/src/app
+    command: go run index.go
+
+
+  py_test:
+    image: "python:3.7.0b3-alpine3.7"
+    working_dir: /usr/src/app
+    volumes:
+      - /e2e_test:/usr/src/app
+    command: python main.py
+
+
+  react:
+    image: "node:9.11.1"
+    working_dir: /home/node/app
+    volumes:
+      - /frontend:/home/node/app
+    entrypoint: /home/node/app/run.sh
