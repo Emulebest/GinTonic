@@ -3,6 +3,7 @@
 # dependencies
 frontend/node_modules
 .idea
+blockchain/target
 
 # testing
 /coverage

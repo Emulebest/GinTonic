@@ -1,0 +1,27 @@
+Steps to installing the project:
+Linux/OS X:
+1) Install docker https://www.docker.com/community-edition
+2) Open terminal
+3) cd to project folder
+4) docker-compose up
+
+Windows 7/8/8.1:
+1) Install docker-toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
+2) Open Docker Quickstart Terminal (When installing it will ask you to show the folder, otherwise search in Пуск)
+3) Open Oracle VM Virtual Box (search in Пуск)
+4) One of the icons is "default" right click it
+5) Select "Настроить"
+6) "Общие папки"
+7) Click the folder add sign on the right
+8) "Путь к папке" - указать путь к одной из папок в проекте (backend_go, blockchain, e2e_test, frontend), ставим галочки возле авто-подключение, создать постоянную папку
+9) Повторить шаг 8 для каждой из папок(backend_go, blockchain, e2e_test, frontend), не меняя предложенного названия строкой ниже
+10) Save settings, Right click "default", Reload it
+10) Open Docker Quickstart Terminal
+11) cd to your project folder
+12) docker-compose up
+
+Windows 10:
+1) Install docker https://www.docker.com/community-edition
+2) Open cmd
+3) cd to project folder
+4) docker-compose up
