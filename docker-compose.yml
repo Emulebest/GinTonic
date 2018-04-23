@@ -24,8 +24,19 @@ services:
 
 
   react:
-    image: "node:9.11.1"
+    image: "node:9.11.1-alpine"
     working_dir: /home/node/app
     volumes:
       - /frontend:/home/node/app
-    entrypoint: /home/node/app/run.sh
+    command: /bin/sh -c "npm install && npm start"
+    ports:
+      - "3000:3000"
+
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123
+    expose:
+      - "5432"

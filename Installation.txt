@@ -24,4 +24,4 @@ Windows 10:
 1) Install docker https://www.docker.com/community-edition
 2) Open cmd
 3) cd to project folder
-4) docker-compose -f docker-compose-win10.yml up
+4) docker-compose -f docker-compose-unix.yml up
