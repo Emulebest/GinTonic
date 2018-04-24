@@ -26,8 +26,9 @@ after_success:
 - cd build
 - mkdir blockchain
 - mv src Cargo.toml blockchain
-- cd ..
+- mkdir frontend
+- mv package.json public src frontend
 - tar -czf gin_tonic.tgz build
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e scp -o stricthostkeychecking=no gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-- sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST 'bash -s /home/deploy.sh'
+- sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
