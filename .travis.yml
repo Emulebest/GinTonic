@@ -19,16 +19,13 @@ addons:
     - sshpass
 after_success:
 - mkdir build
-- mv backend_go blockchain/src blockchain/Cargo.toml e2e_test frontend/public frontend/src
-  frontend/package.json build
-- mv docker*.yml build
-- mv test.sh build
 - cd build
-- mkdir blockchain
-- mv src Cargo.toml blockchain
 - mkdir frontend
-- mv package.json public src frontend
+- mkdir blockchain
 - cd ..
+- mv backend_go docker*.yml test.sh build
+- mv blockchain/src blockchain/Cargo.toml build/blockchain
+- mv frontend/public frontend/src frontend/package.json build/frontend
 - tar -czf gin_tonic.tgz build
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e scp -o stricthostkeychecking=no gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
