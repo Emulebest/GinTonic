@@ -4,5 +4,5 @@ fn main() {
 
 #[test]
 fn test_main() {
-    assert_eq!(1+1, 3)
+    assert_eq!(1+1, 2)
 }
