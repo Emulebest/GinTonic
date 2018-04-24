@@ -1,0 +1,8 @@
+version: '3'
+services:
+  rust:
+    image: "rust:latest"
+    working_dir: /usr/src/myapp
+    volumes:
+      - ./blockchain:/usr/src/myapp
+    command: cargo test
