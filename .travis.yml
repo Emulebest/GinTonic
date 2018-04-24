@@ -29,5 +29,5 @@ after_success:
 - cd ..
 - tar -czf gin_tonic.tgz build
 - export SSHPASS=$DEPLOY_PASS
-- sshpass -e scp gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-- sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST 'bash -s /home/deploy.sh'
+- sshpass -e scp -o stricthostkeychecking=no gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+- sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST 'bash -s /home/deploy.sh'
