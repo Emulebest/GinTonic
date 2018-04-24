@@ -21,11 +21,12 @@ after_success:
 - mkdir build
 - mv backend_go blockchain/src blockchain/Cargo.toml e2e_test frontend/public frontend/src
   frontend/package.json build
-- cd build
-- mkdir blockchain
-- mov src Cargo.toml blockchain
 - mv docker*.yml build
 - mv test.sh build
+- cd build
+- mkdir blockchain
+- mv src Cargo.toml blockchain
+- cd ..
 - tar -czf gin_tonic.tgz build
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e scp gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
