@@ -18,15 +18,15 @@ addons:
     packages:
     - sshpass
 after_success:
-- mkdir build
-- cd build
-- mkdir frontend
-- mkdir blockchain
-- cd ..
-- mv backend_go docker*.yml test.sh build
-- mv blockchain/src blockchain/Cargo.toml build/blockchain
-- mv frontend/public frontend/src frontend/package.json build/frontend
-- tar -czf gin_tonic.tgz build
-- export SSHPASS=$DEPLOY_PASS
-- sshpass -e scp -o stricthostkeychecking=no gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-- sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mkdir build
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && cd build
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mkdir frontend
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mkdir blockchain
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && cd ..
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mv backend_go docker*.yml test.sh build
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mv blockchain/src blockchain/Cargo.toml build/blockchain
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && mv frontend/public frontend/src frontend/package.json build/frontend
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && tar -czf gin_tonic.tgz build
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && export SSHPASS=$DEPLOY_PASS
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && sshpass -e scp -o stricthostkeychecking=no gin_tonic.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "production" && sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
