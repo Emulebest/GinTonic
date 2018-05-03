@@ -10,25 +10,19 @@ use block::crypto::digest::Digest;
 
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Block {
-    index: u64,
-    timestamp: DateTime<Utc>,
-    data: Data,
-    previous_hash: Option<String>,
-    hash: String
+pub struct Block {
+    pub index: u64,
+    pub timestamp: DateTime<Utc>,
+    pub data: Data,
+    pub previous_hash: Option<String>,
+    pub hash: String
 }
 
 impl Block {
-    fn new(index: u64, data: Data, previous_hash: Option<String>) -> Self {
+    pub fn new(index: u64, data: Data, previous_hash: Option<String>) -> Self {
         let timestamp = Utc::now();
-        let mut hasher = Sha256::new();
-        let mut string_builder = index.to_string();
-        string_builder.push_str(&serde_json::to_string(&data).unwrap());
-        string_builder.push_str(&timestamp.format("%Y-%m-%d %H:%M:%S").to_string());
         let prev_hash = previous_hash.unwrap_or("Initial".to_string());
-        string_builder.push_str(&prev_hash.clone());
-        hasher.input_str(&string_builder);
-        let result_string = hasher.result_str();
+        let result_string = Block::gen_hash(index, &data, &prev_hash, &timestamp.format("%Y-%m-%d %H:%M:%S").to_string());
         Block {
             timestamp,
             data,
@@ -37,12 +31,23 @@ impl Block {
             hash: result_string,
         }
     }
+
+    #[inline]
+    pub fn gen_hash(index: u64, data: &Data, previous_hash: &str, timestamp: &str) -> String {
+        let mut hasher = Sha256::new();
+        let mut string_builder = index.to_string();
+        string_builder.push_str(&serde_json::to_string(data).unwrap());
+        string_builder.push_str(timestamp);
+        string_builder.push_str(previous_hash);
+        hasher.input_str(&string_builder);
+        hasher.result_str()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Data {
-    amount: u8,
-    transaction_list: Vec<Transaction>
+pub struct Data {
+    pub amount: u8,
+    pub transaction_list: Vec<Transaction>
 }
 
-type Transaction = HashMap<String, String>;
+pub type Transaction = HashMap<String, String>;
