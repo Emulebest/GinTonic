@@ -1,8 +1,9 @@
+mod tests;
+mod block;
+#[macro_use]
+extern crate serde_derive;
+
 fn main() {
     println!("Hello, world!");
 }
 
-#[test]
-fn test_main() {
-    assert_eq!(1+1, 2)
-}
