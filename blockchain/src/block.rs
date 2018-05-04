@@ -43,6 +43,7 @@ impl Block {
         hasher.result_str()
     }
 
+    #[deprecated(note = "It was only used for testing initial structure")]
     pub fn next_block(&self) -> Self {
         let index = self.index + 1;
         let mut hm = HashMap::new();
