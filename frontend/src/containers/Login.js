@@ -5,7 +5,8 @@ import Login from "../components/auth/Login";
 
 const mapStateToProps = (state) => ({
     token: state.auth.login.token,
-    error: state.auth.login.error
+    error: state.auth.login.error,
+    message : state.auth.login.message
 });
 
 

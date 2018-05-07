@@ -2,11 +2,11 @@ import React from "react";
 import Header from "./Header";
 import Login from "../containers/Login";
 import Logout from "./auth/Logout";
-import Register from "./auth/Register";
+import Register from "../containers/Register";
 import Lending from "./Lending";
 import {Switch, Route} from 'react-router-dom';
 
-const Main = () => (
+const Body = () => (
     <React.Fragment>
         <Switch>
             <Route exact path="/" component={Lending}/>
@@ -20,7 +20,7 @@ const Main = () => (
 const App = () => (
     <React.Fragment>
         <Header/>
-        <Main/>
+        <Body/>
     </React.Fragment>
 );
 

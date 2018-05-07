@@ -26,10 +26,9 @@ export const loginFailure = (payload) => {
     }
 };
 
-export const logout = (payload) => {
+export const logout = () => {
     return {
-        type: LOGOUT,
-        payload
+        type: LOGOUT
     }
 };
 

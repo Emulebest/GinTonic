@@ -5,18 +5,19 @@ import {BASE_URL} from "../../constants/baseUrl";
 
 export default function* login({payload}) {
     try {
-        let data = {...payload};
+        let {email, password} = payload;
         const res = yield call(axios, {
             url: `${BASE_URL}/login`,
             method: "POST",
-            data,
+            data: {email, password},
             headers: {
                 'content-type': 'application/json',
             }
         });
         yield put(loginSuccess(res.data));
         localStorage.setItem('token', res.data.token);
-    } catch (error) {
+    }
+    catch (error) {
         yield put(loginFailure(error));
         localStorage.removeItem('token');
     }

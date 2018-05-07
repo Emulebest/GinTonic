@@ -5,17 +5,18 @@ import {BASE_URL} from "../../constants/baseUrl";
 
 export default function* register({payload}) {
     try {
-        let data = {...payload};
+        let {email, password, username} = payload;
         const res = yield call(axios, {
-            url: `${BASE_URL}/register`,
+            url: `${BASE_URL}/user/register`,
             method: "POST",
-            data,
+            data: {email, password, username},
             headers: {
                 'content-type': 'application/json',
             }
         });
         yield put(registerSuccess(res.data));
-    } catch (error) {
+    }
+    catch (error) {
         yield put(registerFailure(error));
     }
 }
