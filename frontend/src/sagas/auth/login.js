@@ -7,7 +7,7 @@ export default function* login({payload}) {
     try {
         let data = {...payload};
         const res = yield call(axios, {
-            url: `${BASE_URL}/register`,
+            url: `${BASE_URL}/login`,
             method: "POST",
             data,
             headers: {
@@ -15,7 +15,7 @@ export default function* login({payload}) {
             }
         });
         yield put(loginSuccess(res.data));
-        localStorage.setItem('token', res.data.password);
+        localStorage.setItem('token', res.data.token);
     } catch (error) {
         yield put(loginFailure(error));
         localStorage.removeItem('token');

@@ -4,7 +4,7 @@ import {withRouter} from 'react-router'
 import Login from "../components/auth/Login";
 
 const mapStateToProps = (state) => ({
-    token: state.auth.login.data.password,
+    token: state.auth.login.token,
     error: state.auth.login.error
 });
 

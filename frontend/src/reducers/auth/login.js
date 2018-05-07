@@ -17,11 +17,11 @@ export default (state = initialState, action) => {
         case LOGIN_REQUEST :
             return {...state, isFetching: true};
         case LOGIN_SUCCESS:
-            return {...state, isFetching: false, data: action.payload};
+            return {...state, isFetching: false, data: action.payload, token : action.payload.token};
         case LOGIN_FAILURE:
             return {...state, isFetching: false, data: action.payload};
         case LOGOUT:
-            return {...state, diana : "hello"};
+            return {...state, data: null};
         default:
             return state;
     }

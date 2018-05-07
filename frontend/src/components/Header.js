@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
-import Login from "./auth/Login";
 
 const mapStateToProps = (state) => ({
-    token: state.auth.login.data.password,
+    token: state.auth.login.token,
     error: state.auth.login.error
 });
 
@@ -13,8 +12,8 @@ const mapStateToProps = (state) => ({
 class Header extends Component {
 
     render() {
-        //let token = localStorage.getItem('token');
-        let {token} = this.props;
+        console.log("TOKEN" , this.props.token);
+        let token = this.props.token || localStorage.getItem('token');
         return (
             <nav>
                 <ul>
@@ -26,7 +25,7 @@ class Header extends Component {
                         ) : (
                             <React.Fragment>
                                 <li><Link to='/login'>Profile</Link></li>
-                                <li><Link to='/login'>Logout</Link></li>
+                                <li><Link to='/logout'>Logout</Link></li>
                             </React.Fragment>
                         )
                     }
