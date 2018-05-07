@@ -15,11 +15,11 @@ pub enum TransactionType {
 
 impl TransactionType {
     pub fn get_type(t: &mut Transaction) -> Result<Self, TransactionError> {
-        if !t.contains_key("private_key") {
+        if !t.0.contains_key("private_key") {
             Err(TransactionError::new("No private key provided!"))
         } else {
-            if t.contains_key(&"from".to_string()) && t.contains_key(&"to".to_string()) && t.contains_key(&"amount".to_string()) {
-                if let Some(from) = t.get(&"from".to_string()) {
+            if t.0.contains_key(&"from".to_string()) && t.0.contains_key(&"to".to_string()) && t.0.contains_key(&"amount".to_string()) {
+                if let Some(from) = t.0.get(&"from".to_string()) {
                     if from == &"system" {
                         Ok(TransactionType::RewardTransaction)
                     } else {
@@ -28,7 +28,7 @@ impl TransactionType {
                 } else {
                     Err(TransactionError::new("something wrong with transaction"))
                 }
-            } else if t.contains_key(&"device".to_string()) {
+            } else if t.0.contains_key(&"device".to_string()) {
                 Ok(TransactionType::DeviceTransaction)
             } else {
                 Ok(TransactionType::UnknownTransaction)
