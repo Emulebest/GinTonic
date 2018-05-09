@@ -1,0 +1,41 @@
+.nav-item a {
+    display: inline-block;
+    position: relative;
+    color: #9739ff;
+}
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #9739ff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.nav-item a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+li.nav-item{
+    margin-right: 60px;
+    font-weight: bold;
+}
+
+nav.navbar{
+    background-color: #ff9739;
+}
+
+.nav-item a,
+.nav-item a:hover,
+.nav-item a:link,
+.nav-item a:visited,
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:link,
+.navbar-brand:visited{
+    color : white;
+}
