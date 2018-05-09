@@ -2,6 +2,14 @@
     height: 500px;
 }
 
+.lending-row-bg {
+    height: 600px;
+}
+
+.lending-row-sm {
+    height: 400px;
+}
+
 .main, .features, .contact-us {
     background-color: #ff9739 !important;
     color: white;
