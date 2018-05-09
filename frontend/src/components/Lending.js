@@ -51,7 +51,7 @@ class Lending extends Component {
                                                 and smarter for you.
                                             </p>
                                         </div>
-                                        <Button color="success">GET STARTED NOW</Button>
+                                        <Button size="lg" color="success">GET STARTED NOW</Button>
                                     </div>
                                 </Slide>
                             </Col>
@@ -87,8 +87,8 @@ class Lending extends Component {
                                         </div>
                                     </Col>
                                     <Col md="6">
-                                        <img src={require('../images/iotecosystem_icon_final_0.png')} width="100%"
-                                             height="100%"/>
+                                        <img src={require('../images/iot-diagram.png')} width="100%"
+                                             height="85%"/>
                                     </Col>
                                 </Row>
                             </Container>

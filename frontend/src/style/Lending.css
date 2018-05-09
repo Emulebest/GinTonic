@@ -15,6 +15,10 @@
     color: white;
 }
 
+.concept, .getting-started{
+    background-color: white !important;
+}
+
 .headline-top {
     font-size: 3.2rem;
 }
