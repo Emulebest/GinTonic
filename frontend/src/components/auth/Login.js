@@ -2,7 +2,13 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
 import LoginForm from "./forms/LoginForm";
-import {login} from "../../actions/auth/login"
+import {login} from "../../actions/auth/login";
+
+import {
+    Jumbotron,
+    Row,
+    Col
+} from 'reactstrap';
 
 
 class Login extends Component {
@@ -26,8 +32,18 @@ class Login extends Component {
         }
         return (
             <React.Fragment>
-                {this.showError()}
-                <LoginForm onSubmit={this.handleLogin}/>
+                <Jumbotron>
+                    <Row>
+                        <Col md="2"></Col>
+                        <Col md="8">
+                            {this.showError()}
+                            <LoginForm onSubmit={this.handleLogin}/>
+                        </Col>
+                        <Col md="2"></Col>
+                    </Row>
+                </Jumbotron>
+
+
             </React.Fragment>
         );
     }

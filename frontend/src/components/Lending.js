@@ -32,7 +32,7 @@ class Lending extends Component {
 
                             <Col md="6">
                                 <Slide left>
-                                    <img src={require('../images/smart-home-smart-i.png')}
+                                    <img alt="" src={require('../images/smart-home-smart-i.png')}
                                          width="100%" height="100%"/>
                                 </Slide>
                             </Col>
@@ -87,7 +87,7 @@ class Lending extends Component {
                                         </div>
                                     </Col>
                                     <Col md="6">
-                                        <img src={require('../images/iot-diagram.png')} width="100%"
+                                        <img alt="" src={require('../images/iot-diagram.png')} width="100%"
                                              height="85%"/>
                                     </Col>
                                 </Row>

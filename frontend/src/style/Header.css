@@ -31,10 +31,18 @@ nav.navbar {
     background-color: #ff9739 !important;
 }
 
-.navbar a,
-.navbar a:hover,
-.navbar a:link,
-.navbar a:visited {
+.nav-item a,
+.nav-item a:hover,
+.nav-item a:link,
+.nav-item a:visited {
     color: white !important;
     text-decoration: none;
+}
+
+.dropdown-item a,
+.dropdown-item a,
+.dropdown-item a:hover,
+.dropdown-item a:link,
+.dropdown-item a:visited{
+    color: black !important;
 }

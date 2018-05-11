@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import RegisterFrom from "./forms/RegisterForm";
-import {register} from "../../actions/auth/register"
+import {register} from "../../actions/auth/register";
+
 
 class Register extends Component {
 
@@ -19,10 +20,11 @@ class Register extends Component {
 
     render = () => {
         return (
-            <React.Fragment>
-                {this.showError()}
-                <RegisterFrom onSubmit={this.handleRegister}/>
-            </React.Fragment>
+            <div className="form-container">
+                <div className="signup-form">
+                    <RegisterFrom onSubmit={this.handleRegister}/>
+                </div>
+            </div>
         )
     }
 }
