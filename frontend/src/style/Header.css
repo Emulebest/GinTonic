@@ -1,0 +1,40 @@
+.nav-item a.nav-link {
+    display: inline-block;
+    position: relative;
+    color: #28a745;
+}
+
+.nav-item a.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #28a745;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-item a.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+li.nav-item {
+    margin-right: 60px;
+    font-weight: bold;
+}
+
+nav.navbar {
+    background-color: #ff9739 !important;
+}
+
+.navbar a,
+.navbar a:hover,
+.navbar a:link,
+.navbar a:visited {
+    color: white !important;
+    text-decoration: none;
+}

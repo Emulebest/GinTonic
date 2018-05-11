@@ -1,0 +1,64 @@
+.lending-row {
+    height: 500px;
+}
+
+.lending-row-bg {
+    height: 600px;
+}
+
+.lending-row-sm {
+    height: 400px;
+}
+
+.main, .features, .contact-us {
+    background-color: #ff9739 !important;
+    color: white;
+}
+
+.concept, .getting-started{
+    background-color: white !important;
+}
+
+.headline-top {
+    font-size: 3.2rem;
+}
+
+.headline {
+    font-size: 2.7rem;
+}
+
+.description {
+    padding: 35px 0 25px 0;
+    letter-spacing: 1px;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+.block-heading-center {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.block-heading-center h1 {
+    width: 100%;
+}
+
+.card{
+    color : black;
+}
+.img-holder{
+    width: 100%;
+    text-align: center;
+}
+.card img{
+    height: 150px;
+    width: 150px;
+}
+
+.credentials{
+    margin-top: 35px;
+}
+
+.credentials h6{
+    margin-bottom: 25px;
+}
