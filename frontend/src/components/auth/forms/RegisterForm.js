@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {Icon} from "react-fa";
 import {Input, Form, FormGroup, Button, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap";
 
-import "../../../style/Register.css";
+import "../../../style/Auth.css";
 import {Link} from "react-router-dom";
 
 let RegisterForm = (props) => {

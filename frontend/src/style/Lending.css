@@ -11,7 +11,7 @@
 }
 
 .main, .features, .contact-us {
-    background-color: #ff9739 !important;
+    background-color: var(--main-color-orange) !important;
     color: white;
 }
 

@@ -1,7 +1,7 @@
 .nav-item a.nav-link {
     display: inline-block;
     position: relative;
-    color: #28a745;
+    color: var(--secondary-color-blue);
 }
 
 .nav-item a.nav-link::after {
@@ -12,7 +12,7 @@
     height: 3px;
     bottom: 0;
     left: 0;
-    background-color: #28a745;
+    background-color: var(--secondary-color-blue);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
@@ -28,7 +28,7 @@ li.nav-item {
 }
 
 nav.navbar {
-    background-color: #ff9739 !important;
+    background-color: var(--main-color-orange) !important;
 }
 
 .nav-item a,

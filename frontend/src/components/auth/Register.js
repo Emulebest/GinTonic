@@ -21,7 +21,7 @@ class Register extends Component {
     render = () => {
         return (
             <div className="form-container">
-                <div className="signup-form">
+                <div className="auth-form">
                     <RegisterFrom onSubmit={this.handleRegister}/>
                 </div>
             </div>

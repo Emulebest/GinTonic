@@ -4,12 +4,6 @@ import {Redirect} from 'react-router-dom';
 import LoginForm from "./forms/LoginForm";
 import {login} from "../../actions/auth/login";
 
-import {
-    Jumbotron,
-    Row,
-    Col
-} from 'reactstrap';
-
 
 class Login extends Component {
 
@@ -31,20 +25,11 @@ class Login extends Component {
             return <Redirect to="/"/>;
         }
         return (
-            <React.Fragment>
-                <Jumbotron>
-                    <Row>
-                        <Col md="2"></Col>
-                        <Col md="8">
-                            {this.showError()}
-                            <LoginForm onSubmit={this.handleLogin}/>
-                        </Col>
-                        <Col md="2"></Col>
-                    </Row>
-                </Jumbotron>
-
-
-            </React.Fragment>
+            <div className="form-container">
+                <div className="auth-form">
+                    <LoginForm onSubmit={this.handleLogin}/>
+                </div>
+            </div>
         );
     }
 }

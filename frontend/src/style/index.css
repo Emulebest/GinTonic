@@ -1,5 +1,12 @@
+:root {
+    --main-color-orange:#ff9739 ;
+    --secondary-color-blue:#19aa8d;
+    --main-font : 'Nunito', sans-serif;
+    --auth-gradient :linear-gradient(to bottom, #ff9739, #ffa43c, #ffb041, #febc48, #fdc850);
+}
+
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: var(--main-font);
 }
 
 .jumbotron{
