@@ -6,6 +6,8 @@ services:
     volumes:
       - ./blockchain:/usr/src/myapp
     command: cargo run
+    links:
+      - mongo
 
   golang:
     image: "golang:1.10.1-alpine3.7"
@@ -13,6 +15,8 @@ services:
     volumes:
       - ./backend_go:/go/src/app
     command: go run index.go
+    links:
+      - db
 
 
   py_test:
@@ -21,6 +25,10 @@ services:
     volumes:
       - ./e2e_test:/usr/src/app
     command: python main.py
+    links:
+      - golang
+      - rust
+      - react
 
 
   react:
@@ -31,3 +39,12 @@ services:
     command: /bin/sh -c "npm install && npm start"
     ports:
       - "3000:3000"
+    links:
+      - golang
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
