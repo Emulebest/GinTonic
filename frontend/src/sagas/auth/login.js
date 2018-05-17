@@ -1,15 +1,18 @@
+// @flow
+
 import {put, call} from 'redux-saga/effects';
+import type {IOEffect} from 'redux-saga/effects';
 import axios from "axios";
 import {loginSuccess, loginFailure} from "../../actions/auth/login";
 import {BASE_URL} from "../../constants/baseUrl";
+import type {LoginType} from "../../types/auth";
 
-export default function* login({payload}) {
+export default function* login({payload}: { payload: LoginType }): Generator<IOEffect, void, any> {
     try {
-        let {email, password} = payload;
         const res = yield call(axios, {
             url: `${BASE_URL}/login`,
             method: "POST",
-            data: {email, password},
+            data: payload,
             headers: {
                 'content-type': 'application/json',
             }
