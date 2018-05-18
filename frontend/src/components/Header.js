@@ -1,4 +1,7 @@
+// @flow
+
 import React from 'react';
+import type {Node} from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
@@ -21,18 +24,28 @@ import {
 
 import "../style/Header.css"
 
-let ScrollLink = Scroll.Link;
+const ScrollLink = Scroll.Link;
 
 const mapStateToProps = (state) => ({
     token: state.auth.login.token
 });
 
+type HeaderProps = {
+    location: {
+        pathname: string
+    },
+    token: ?string
+};
 
-class Header extends React.Component {
-    constructor(props) {
+type HeaderState = {
+    isOpen: boolean,
+    scrollLinks: Array<{ to: string, name: string }>
+}
+
+
+class Header extends React.Component <HeaderProps, HeaderState> {
+    constructor(props: HeaderProps) {
         super(props);
-
-        this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
             scrollLinks: [
@@ -44,14 +57,14 @@ class Header extends React.Component {
         };
     }
 
-    toggle() {
+    toggle(): void {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
 
-    checkLocation({name, to}) {
-        let {pathname} = this.props.location;
+    checkLocation({name, to}: { name: string, to: string }): Node {
+        let {pathname}: { pathname: string } = this.props.location;
         return (pathname === "/") ? (
             <NavItem>
                 <NavLink tag={ScrollLink}
@@ -68,8 +81,8 @@ class Header extends React.Component {
         );
     }
 
-    render() {
-        let token = this.props.token || localStorage.getItem('token');
+    render(): Node {
+        let token: ?string = this.props.token || localStorage.getItem('token');
 
         return (
             <React.Fragment>
@@ -80,7 +93,7 @@ class Header extends React.Component {
                         <Nav className="ml-auto" navbar>
 
                             {
-                                this.state.scrollLinks.map(linkObj => {
+                                this.state.scrollLinks.map((linkObj) => {
                                     return this.checkLocation(linkObj);
                                 })
                             }
