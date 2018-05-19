@@ -4,27 +4,39 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAILURE
 } from "../../constants/actionTypes";
-import type {RegisterType, User} from "../../types/auth";
-import type {Action, RequestError} from "../../types/general";
+import type {User} from "../../types/auth/index";
+import type {RequestError} from "../../types/general";
+import type{RegisterAction} from "../../types/auth/register";
 
-export const register = (payload: RegisterType): Action => {
+export const register = (email: string,
+                         password: string,
+                         confirmPassword: string,
+                         userName: string): RegisterAction => {
     return {
         type: REGISTER_REQUEST,
-        payload
+        payload: {
+            email, password, confirmPassword, userName
+        }
     }
 };
 
-export const registerSuccess = (payload: User): Action => {
+export const registerSuccess = (user: User): RegisterAction => {
     return {
         type: REGISTER_SUCCESS,
-        payload
+        payload: {
+            user
+        }
     }
 };
 
-export const registerFailure = (payload: RequestError): Action => {
+export const registerFailure = (error: RequestError): RegisterAction => {
+    let message = error.response.data.message;
+    let {status} = error.response;
     return {
         type: REGISTER_FAILURE,
-        payload
+        payload: {
+            message, status
+        }
     }
 };
 

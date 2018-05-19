@@ -5,9 +5,9 @@ import type {IOEffect} from 'redux-saga/effects';
 import axios from "axios";
 import {loginSuccess, loginFailure} from "../../actions/auth/login";
 import {BASE_URL} from "../../constants/baseUrl";
-import type {LoginType} from "../../types/auth";
+import type{LoginResponseSuccess} from "../../types/auth/login";
 
-export default function* login({payload}: { payload: LoginType }): Generator<IOEffect, void, any> {
+export default function* login({payload}: { payload: { email: string, password: string } }): Generator<IOEffect, void, any> {
     try {
         const res = yield call(axios, {
             url: `${BASE_URL}/login`,
@@ -17,7 +17,8 @@ export default function* login({payload}: { payload: LoginType }): Generator<IOE
                 'content-type': 'application/json',
             }
         });
-        yield put(loginSuccess(res.data));
+        let {token, user}: LoginResponseSuccess = res.data;
+        yield put(loginSuccess(token, user));
         localStorage.setItem('token', res.data.token);
     }
     catch (error) {

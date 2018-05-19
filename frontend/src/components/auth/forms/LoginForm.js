@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 
@@ -43,7 +45,6 @@ let LoginForm = (props) => {
                 </FormGroup>
 
             </Form>
-
         </React.Fragment>
     )
 };

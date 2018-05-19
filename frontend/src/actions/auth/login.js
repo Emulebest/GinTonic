@@ -6,31 +6,40 @@ import {
     LOGOUT
 } from "../../constants/actionTypes";
 
-import type{LoginType, LoginTypeSuccess, User} from "../../types/auth";
-import type {Action, RequestError} from "../../types/general";
+import type{User} from "../../types/auth/index";
+import type {RequestError} from "../../types/general";
+import type {LoginAction, LogoutAction} from "../../types/auth/login";
 
-export const login = (payload: LoginType): Action => {
+export const login = (email: string, password: string): LoginAction => {
     return {
         type: LOGIN_REQUEST,
-        payload
+        payload: {
+            email, password
+        }
     }
 };
 
-export const loginSuccess = (payload: {...LoginTypeSuccess, ...User}): Action => {
+export const loginSuccess = (token: string, user: User): LoginAction => {
     return {
         type: LOGIN_SUCCESS,
-        payload
+        payload: {
+            token, user
+        }
     }
 };
 
-export const loginFailure = (payload: RequestError): Action => {
+export const loginFailure = (error: RequestError): LoginAction => {
+    let message = error.response.data.message;
+    let {status} = error.response;
     return {
         type: LOGIN_FAILURE,
-        payload
+        payload: {
+            message, status
+        }
     }
 };
 
-export const logout = (): Action => {
+export const logout = (): LogoutAction => {
     return {
         type: LOGOUT,
         payload: null

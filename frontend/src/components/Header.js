@@ -27,7 +27,7 @@ import "../style/Header.css"
 const ScrollLink = Scroll.Link;
 
 const mapStateToProps = (state) => ({
-    token: state.auth.login.token
+    token: state.auth.login.data.token
 });
 
 type HeaderProps = {

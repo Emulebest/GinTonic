@@ -1,20 +1,20 @@
 // @flow
-
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     LOGOUT
 } from "../../constants/actionTypes";
-import type {InitialState, Action} from "../../types/general";
+import type {InitialState} from "../../types/general";
+import type {LoginAction, LogoutAction} from "../../types/auth/login";
 
 const initialState = {
     data: {},
-    error: {},
+    status : null,
     message: null
 };
 
-export default (state: InitialState = initialState, action: Action) => {
+export default (state: InitialState = initialState, action: LoginAction | LogoutAction): InitialState => {
     switch (action.type) {
         case LOGIN_REQUEST :
             return {...state, isFetching: true};
@@ -23,17 +23,16 @@ export default (state: InitialState = initialState, action: Action) => {
                 ...state,
                 isFetching: false,
                 data: action.payload,
-                token: action.payload.token,
                 message: null,
                 error: null
             };
         case LOGIN_FAILURE:
             return {
                 ...state,
+                ...action.payload,
                 isFetching: false,
-                data: null,
-                error: action.payload.response.status,
-                message: action.payload.response.data.message
+                data: null
+
             };
         case LOGOUT:
             return {...state, token: null};

@@ -1,24 +1,34 @@
+// @flow
+
 import React, {Component} from 'react';
+import type {Node} from 'react';
 
 import RegisterFrom from "./forms/RegisterForm";
 import {register} from "../../actions/auth/register";
+import type {Dispatch} from "../../types/general";
+import type {RegisterCredentials} from "../../types/auth/register";
 
+type RegisterProps = {
+    dispatch: Dispatch,
+    message: ?string,
+}
 
-class Register extends Component {
+class Register extends Component<RegisterProps> {
 
-    showError = () => {
-        return (this.props.message) ? (
+    showError = (): ?Node => {
+        let {message} = this.props;
+        return (message) ? (
             <React.Fragment>
-                <p>{this.props.message}</p>
+                <p>{message}</p>
             </React.Fragment>
         ) : null;
     };
 
-    handleRegister = (values) => {
-        this.props.dispatch(register(values));
+    handleRegister = ({email, password, confirmPassword, userName}: RegisterCredentials) => {
+        this.props.dispatch(register(email, password, confirmPassword, userName));
     };
 
-    render = () => {
+    render = (): Node => {
         return (
             <div className="form-container">
                 <div className="auth-form">

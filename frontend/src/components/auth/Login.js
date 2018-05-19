@@ -6,13 +6,13 @@ import {Redirect} from 'react-router-dom';
 import LoginForm from "./forms/LoginForm";
 import {login} from "../../actions/auth/login";
 
-import type {LoginType} from "../../types/auth";
-import type {Action} from "../../types/general";
+import type {LoginCredentials} from "../../types/auth/login";
+import type {Dispatch} from "../../types/general";
 
 type LoginProps = {
     message: ?string,
     token: ?string,
-    dispatch: ((payload: LoginType) => Action) => Action
+    dispatch: Dispatch
 }
 
 
@@ -26,8 +26,8 @@ class Login extends Component<LoginProps> {
         ) : null;
     };
 
-    handleLogin = ({email, password}: LoginType) => {
-        this.props.dispatch(login({email, password}));
+    handleLogin = ({email, password}: LoginCredentials) => {
+        this.props.dispatch(login(email, password));
     };
 
     render = (): Node => {

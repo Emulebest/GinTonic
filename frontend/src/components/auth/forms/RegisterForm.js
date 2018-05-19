@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import {Field, reduxForm} from 'redux-form';
 import {Icon} from "react-fa";
@@ -20,7 +22,7 @@ let RegisterForm = (props) => {
                     <InputGroupAddon addonType="prepend">
                         <InputGroupText><Icon name="user"/></InputGroupText>
                     </InputGroupAddon>
-                    <Input tag={Field} type="text" component="input" name="username" placeholder="Username"/>
+                    <Input tag={Field} type="text" component="input" name="userName" placeholder="Username"/>
                 </InputGroup>
 
                 <InputGroup>
