@@ -7,10 +7,13 @@ func initializeRoutes() *gin.Engine {
 
 	router := gin.Default()
 
-	userRoutes := router.Group("/u")
+	userRoutes := router.Group("/user")
 	{
-		userRoutes.POST("/register", handlers.RegisterUser)
-		userRoutes.POST("/login", handlers.LoginUser)
+		authRoutes := userRoutes.Group("/auth")
+		{
+			authRoutes.POST("/register", handlers.RegisterUser)
+			authRoutes.POST("/login", handlers.LoginUser)
+		}
 	}
 
 	return router

@@ -24,8 +24,8 @@ func RegisterUser(context *gin.Context) {
 		return
 	}
 
-	data := make(map[string]*string)
-	data["token"] = &newUser.Token
+	data := make(map[string]*models.User)
+	data["user"] = newUser
 
 	context.JSON(http.StatusCreated, data)
 }
@@ -35,20 +35,20 @@ func LoginUser(context *gin.Context) {
 	var boundUser models.User
 	context.BindJSON(&boundUser)
 
-	token, loginOK := models.LoginUser(boundUser.Username, boundUser.Password)
+	loggedUser, err := models.LoginUser(boundUser.Username, boundUser.Password)
 
-	if !loginOK {
+	if err != nil {
 		context.AbortWithStatusJSON(
 			http.StatusBadRequest,
 			gin.H{
-				"error": "the given username/password combination is incorrect",
+				"error": err.Error(),
 			},
 		)
 		return
 	}
 
-	data := make(map[string]*string)
-	data["token"] = &token
+	data := make(map[string]*models.User)
+	data["user"] = loggedUser
 
 	context.JSON(http.StatusAccepted, data)
 }

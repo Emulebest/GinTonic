@@ -49,14 +49,15 @@ func RegisterUser(username, password string) (*User, error) {
 
 // Checks the given username/password combination and return token,
 // if the combination is correct
-func LoginUser(username, password string) (string, bool) {
+func LoginUser(username, password string) (*User, error) {
 
 	for i := 0; i < len(userList); i++ {
 		if userList[i].Username == username && userList[i].Password == password {
 			userList[i].Token = generateSessionToken()
-			return userList[i].Token, true
+			result := userList[i]
+			return &result, nil
 		}
 	}
 
-	return "", false
+	return nil, errors.New("the username/password combination is incorrect")
 }
