@@ -1,21 +1,23 @@
 package main
 
 import "github.com/gin-gonic/gin"
-import "./controllers"
+import "./handlers"
 
-func setUpRouter() *gin.Engine {
+func initializeRoutes() *gin.Engine {
 
 	router := gin.Default()
 
-	router.POST("/register", controllers.RegisterUser)
-
-	// TODO: router.POST("/login", controllers.Login)
+	userRoutes := router.Group("/u")
+	{
+		userRoutes.POST("/register", handlers.RegisterUser)
+		userRoutes.POST("/login", handlers.LoginUser)
+	}
 
 	return router
 }
 
 func main() {
 
-	router := setUpRouter()
+	router := initializeRoutes()
 	router.Run()
 }
