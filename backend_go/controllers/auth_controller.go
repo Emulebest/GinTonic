@@ -6,27 +6,27 @@ import (
 	"net/http"
 )
 
-func Register(c *gin.Context) {
+func RegisterUser(context *gin.Context) {
 
-	var formPerson models.Person
+	var user models.User
 
-	data := make(map[string]*models.Person)
+	// If binding fails, aborting the request with HTTP 400
+	context.BindJSON(&user)
 
-	c.BindJSON(&formPerson)
-
-	if formPerson.Username == "" || formPerson.Password == "" {
-		c.AbortWithStatusJSON(
+	if user.Username == "" || user.Password == "" {
+		context.AbortWithStatusJSON(
 			http.StatusLengthRequired,
 			gin.H{
 				"error": "required fields not satisfied",
 			},
 		)
 	}
-
-	person := models.CreatePerson(formPerson.Username, formPerson.Password)
-
+	/*
+	person := models.RegisterUser(user.Username, user.Password)
+	*/
 	// TODO: Insert new person into the database
 
-	data["data"] = person
-	c.JSON(http.StatusCreated, data)
+	data := make(map[string]*models.User)
+	data["data"] = &user
+	context.JSON(http.StatusCreated, data)
 }

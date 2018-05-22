@@ -7,7 +7,7 @@ func setUpRouter() *gin.Engine {
 
 	router := gin.Default()
 
-	router.POST("/register", controllers.Register)
+	router.POST("/register", controllers.RegisterUser)
 
 	// TODO: router.POST("/login", controllers.Login)
 
