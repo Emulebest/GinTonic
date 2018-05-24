@@ -10,7 +10,7 @@ services:
       - mongo
 
   golang:
-    image: "golang:1.10.1-alpine3.7"
+    image: "golang:1.10.2-stretch"
     working_dir: /go/src/app
     volumes:
       - ./backend_go:/go/src/app
