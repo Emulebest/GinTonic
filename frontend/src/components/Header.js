@@ -39,7 +39,7 @@ type HeaderProps = {
 
 type HeaderState = {
     isOpen: boolean,
-    scrollLinks: Array<{ to: string, name: string }>
+    scrollLinks: Array<{ id: number, to: string, name: string }>
 }
 
 
@@ -49,10 +49,10 @@ class Header extends React.Component <HeaderProps, HeaderState> {
         this.state = {
             isOpen: false,
             scrollLinks: [
-                {to: "concept", name: "Concept"},
-                {to: "features", name: "Features"},
-                {to: "getting-started", name: "Get started"},
-                {to: "contact-us", name: "Contact"},
+                {id: 1, to: "concept", name: "Concept"},
+                {id: 2, to: "features", name: "Features"},
+                {id: 3, to: "getting-started", name: "Get started"},
+                {id: 4, to: "contact-us", name: "Contact"},
             ]
         };
     }
@@ -63,10 +63,10 @@ class Header extends React.Component <HeaderProps, HeaderState> {
         });
     }
 
-    checkLocation({name, to}: { name: string, to: string }): Node {
+    checkLocation({id, name, to}: { id: number, name: string, to: string }): Node {
         let {pathname}: { pathname: string } = this.props.location;
         return (pathname === "/") ? (
-            <NavItem>
+            <NavItem key={id}>
                 <NavLink tag={ScrollLink}
                          to={to}
                          smooth={true}
@@ -75,7 +75,7 @@ class Header extends React.Component <HeaderProps, HeaderState> {
                 </NavLink>
             </NavItem>
         ) : (
-            <NavItem>
+            <NavItem key={id}>
                 <NavLink tag={Link} to='/'>{name}</NavLink>
             </NavItem>
         );
@@ -115,7 +115,7 @@ class Header extends React.Component <HeaderProps, HeaderState> {
                                             </DropdownToggle>
                                             <DropdownMenu right>
                                                 <DropdownItem>
-                                                    <NavLink tag={Link} to='/'>My devices</NavLink>
+                                                    <NavLink tag={Link} to='/account'>My devices</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
                                                     <NavLink tag={Link} to='/'>Settings</NavLink>

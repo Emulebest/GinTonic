@@ -1,0 +1,31 @@
+.container-device {
+    height: 200px;
+}
+
+.container-device-content{
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px;
+    border: 1px solid gray;
+    height: 100%;
+}
+
+.device-content{
+    height: 70%;
+}
+
+.row-devices{
+    margin-bottom: 3%;
+}
+
+.control-panel{
+    height: 30%;
+    margin-top: 10px;
+}
+
+.switch-indicator{
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    background-color : green !important;
+}
