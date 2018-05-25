@@ -2,30 +2,45 @@
     height: 200px;
 }
 
-.container-device-content{
+.jumbotron {
+    background-color: white !important;
+}
+
+.container-device-content {
     width: 100%;
     border-radius: 20px;
     padding: 15px;
-    border: 1px solid gray;
+    border: 2px solid  #ff9739;
     height: 100%;
 }
 
-.device-content{
+.light-param {
+    padding: 0 !important;
+}
+
+.device-content {
     height: 70%;
 }
 
-.row-devices{
+.row-devices {
     margin-bottom: 3%;
 }
 
-.control-panel{
+.control-panel {
     height: 30%;
     margin-top: 10px;
 }
 
-.switch-indicator{
+.switch-indicator {
     width: 20px;
     height: 20px;
     border-radius: 500px;
-    background-color : green !important;
+}
+
+.indicator-green {
+    background-color: green !important;
+}
+
+.indicator-red {
+    background-color: red !important;
 }

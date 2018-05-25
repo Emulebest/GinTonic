@@ -4,22 +4,19 @@ import React, {Component} from "react";
 import {Col} from "reactstrap";
 import {Container, Row, Button} from "reactstrap";
 import type {Node} from 'react';
-import type {Device} from "../types/devices";
+
 import "../style/Device.css";
+import type {Device} from "../types/devices";
 
 
-type DeviceProps = {
-    status : boolean
-};
 type DeviceState = {
     imgArr: Array<string>,
-    lightParams: Array<string>,
-    status : boolean
+    lightParams: Array<string>
 };
 
-class DeviceBlock extends Component<DeviceProps, DeviceState> {
+class DeviceBlock extends Component<Device, DeviceState> {
 
-    constructor(props: DeviceProps) {
+    constructor(props: Device) {
         super(props);
         this.state = {
             imgArr: [
@@ -47,8 +44,6 @@ class DeviceBlock extends Component<DeviceProps, DeviceState> {
         let imgIndex: number = Math.floor(Math.random() * this.state.lightParams.length);
         let img: string = this.state.imgArr[imgIndex];
 
-        //let {device} : {device : Device} = this.props;
-
         return (
             <Col md="4" className="container-device">
                 <Container className="container-device-content">
@@ -58,29 +53,31 @@ class DeviceBlock extends Component<DeviceProps, DeviceState> {
                                  width="100%" height="100%"/>
                         </Col>
                         <Col md="5">
-                            <div className="light-param">
-                                <Row>
-                                    {
-                                        this.state.lightParams.map(lightParam => {
-                                            let paramVal : string = this.props[lightParam];
-                                            return (
-                                                <React.Fragment>
-                                                    <Col md="5">
-                                                        <h5>{lightParam[0].toUpperCase() + " :"}</h5>
-                                                    </Col>
-                                                    <Col md="7">
-                                                        <h5>{this.getParamValue(lightParam, paramVal)}</h5>
-                                                    </Col>
-                                                </React.Fragment>
-                                            )
-                                        })
-                                    }
+                            <Row>
+                                {
+                                    this.state.lightParams.map(lightParam => {
+                                        let paramVal: string = this.props[lightParam];
+                                        return (
+                                            <React.Fragment>
+                                                <Col md="5" className="light-param">
+                                                    <h5>{lightParam[0].toUpperCase() + " :"}</h5>
+                                                </Col>
+                                                <Col md="7" className="light-param">
+                                                    <h5>{this.getParamValue(lightParam, paramVal)}</h5>
+                                                </Col>
+                                            </React.Fragment>
+                                        )
+                                    })
+                                }
 
-                                </Row>
-                            </div>
+                            </Row>
                         </Col>
                         <Col md="2">
-                            <div className="switch-indicator"></div>
+                            <div className={
+                                (this.props.status ?
+                                        "switch-indicator indicator-green" :
+                                        "switch-indicator indicator-red"
+                                )}></div>
                         </Col>
                     </Row>
                     <Row className="control-panel">

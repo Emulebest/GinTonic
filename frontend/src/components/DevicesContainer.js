@@ -4,7 +4,8 @@ import lodash from "lodash";
 import React, {Component} from "react";
 import {Container, Row, Jumbotron} from "reactstrap";
 import type {Node} from 'react';
-import Device from "./Device";
+import DeviceBlock from "./Device";
+import type {Device} from "../types/devices";
 import {getDevices} from "../actions/devices/allDevices";
 import type{Dispatch} from "../types/general";
 
@@ -25,12 +26,12 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         return lodash.chunk(this.props.devices, 3);
     }
 
-    renderNested = (row: Array<Device>): Array<Node> => {
+    renderNested = (row: Array<Device>):Array<Node> => {
         return (
-            row.map((device) => {
+            row.map((device : Device) => {
                 let {id} = device;
                 return (
-                    <Device key={id} {...device} status={device.status}/>
+                    <DeviceBlock key={id} {...device}/>
                 )
             })
         )
