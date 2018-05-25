@@ -8,6 +8,9 @@ blockchain/target
 # testing
 /coverage
 
+#Cargo.lock
+blockchain/Cargo.lock
+
 # production
 /build
 

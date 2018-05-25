@@ -6,13 +6,17 @@ services:
     volumes:
       - /blockchain:/usr/src/myapp
     command: cargo run
+    links:
+      - mongo
 
   golang:
-    image: "golang:1.10.1-alpine3.7"
+    image: "golang:1.10.2-stretch"
     working_dir: /go/src/app
     volumes:
       - /backend_go:/go/src/app
     command: go run index.go
+    links:
+      - db
 
 
   py_test:
@@ -21,6 +25,10 @@ services:
     volumes:
       - /e2e_test:/usr/src/app
     command: python main.py
+    links:
+      - golang
+      - rust
+      - react
 
 
   react:
@@ -31,7 +39,8 @@ services:
     command: /bin/sh -c "npm install && npm start"
     ports:
       - "3000:3000"
-
+    links:
+      - golang
 
   db:
     image: postgres
@@ -40,3 +49,10 @@ services:
       POSTGRES_PASSWORD: 123
     expose:
       - "5432"
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
