@@ -1,32 +1,53 @@
 // @flow
 
 import React, {Component} from "react";
-import {Col} from "reactstrap";
-import {Container, Row, Button} from "reactstrap";
-import type {Node} from 'react';
+import {Container, Row, Button, Col} from "reactstrap";
+import ControlModal from "./ControlModal";
+import InfoModal from "./InfoModal";
 
-import "../style/Device.css";
-import type {Device} from "../types/devices";
+import type {Node} from 'react';
+import type {Device} from "../../types/devices";
+
+import "../../style/Device.css";
 
 
 type DeviceState = {
     imgArr: Array<string>,
-    lightParams: Array<string>
+    lightParams: Array<string>,
+    modalControl: boolean,
+    modalInfo: boolean
 };
 
 class DeviceBlock extends Component<Device, DeviceState> {
 
     constructor(props: Device) {
         super(props);
+        const self: any = this;
         this.state = {
             imgArr: [
-                require("../images/light1.png"),
-                require("../images/light2.png"),
-                require("../images/light3.png"),
-                require("../images/light4.png"),
-                require("../images/light5.png")],
-            lightParams: ["status", "place", "brightness"]
-        }
+                require("../../images/light1.png"),
+                require("../../images/light2.png"),
+                require("../../images/light3.png"),
+                require("../../images/light4.png"),
+                require("../../images/light5.png")],
+            lightParams: ["status", "place", "brightness"],
+            modalControl: false,
+            modalInfo: false
+        };
+        self.toggleControl = this.toggleControl.bind(this);
+        self.toggleInfo = this.toggleInfo.bind(this);
+    }
+
+    toggleControl() : void {
+        this.setState({
+            modalControl: !this.state.modalControl
+        });
+    }
+
+    toggleInfo() : void {
+        this.setState({
+            modalInfo: !this.state.modalInfo
+        });
     }
 
     getParamValue(paramKey: string, paramValue: string): string {
@@ -82,11 +103,15 @@ class DeviceBlock extends Component<Device, DeviceState> {
                     </Row>
                     <Row className="control-panel">
                         <Col md="6">
-                            <Button color="primary" block>INFO</Button>
+                            <Button onClick={this.toggleInfo} color="primary" block>INFO</Button>
                         </Col>
                         <Col md="6">
-                            <Button color="success" block>CONTROL</Button>
+                            <Button onClick={this.toggleControl} color="success" block>CONTROL</Button>
                         </Col>
+                        <ControlModal {...this.props}
+                                      isOpen={this.state.modalControl}
+                                      toggle={this.toggleControl}/>
+                        <InfoModal isOpen={this.state.modalInfo} toggle={this.toggleInfo}/>
                     </Row>
                 </Container>
             </Col>

@@ -3,7 +3,7 @@
 import {connect} from "react-redux";
 import {withRouter} from 'react-router'
 
-import DevicesContainer from "../components/DevicesContainer";
+import DevicesContainer from "../components/devices/DevicesContainer";
 
 const mapStateToProps = (state) => ({
     devices: state.devices.all.data.devices

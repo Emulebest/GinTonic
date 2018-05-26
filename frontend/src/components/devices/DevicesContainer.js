@@ -5,9 +5,9 @@ import React, {Component} from "react";
 import {Container, Row, Jumbotron} from "reactstrap";
 import type {Node} from 'react';
 import DeviceBlock from "./Device";
-import type {Device} from "../types/devices";
-import {getDevices} from "../actions/devices/allDevices";
-import type{Dispatch} from "../types/general";
+import type {Device} from "../../types/devices";
+import {getDevices} from "../../actions/devices/allDevices";
+import type{Dispatch} from "../../types/general";
 
 type DeviceContainerProps = {
     devices: Array<Device>,
