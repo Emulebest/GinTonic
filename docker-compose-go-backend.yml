@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  golang:
+    image: "golang:1.10.2-stretch"
+    working_dir: /go/src/app
+    volumes:
+      - ./backend_go:/go/src/app
+    command: /bin/sh -c "go get github.com/gin-gonic/gin && go run index.go"
+    ports:
+     - "8080:8080"
+    links:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123
+    expose:
+      - "5432"
