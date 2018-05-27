@@ -12,7 +12,13 @@ import "../../style/Device.css";
 
 type DeviceProps = {
     toggleSwitch : (deviceId : number) => void,
-    changeBrightness : (deviceId : number) => void
+    changeBrightness : (deviceId : number) => void,
+    id : number,
+    brightness : number,
+    place : string,
+    name : string,
+    description : string,
+    status : boolean
 }
 
 type DeviceState = {
@@ -114,7 +120,11 @@ class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
                         <ControlModal {...this.props}
                                       isOpen={this.state.modalControl}
                                       toggle={this.toggleControl}/>
-                        <InfoModal isOpen={this.state.modalInfo} toggle={this.toggleInfo}/>
+                        <InfoModal
+                            {...this.props}
+                            img={img}
+                            isOpen={this.state.modalInfo}
+                            toggle={this.toggleInfo}/>
                     </Row>
                 </Container>
             </Col>

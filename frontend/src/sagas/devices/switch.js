@@ -18,9 +18,11 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         // });
         let device = {
             id: 2,
+            name: "Bulb 2",
             status: false,
             place: "Bathroom",
-            brightness: 0
+            brightness: 0,
+            description : "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything. "
         };
 
         yield put(switchDeviceSuccess(device));

@@ -20,9 +20,11 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
         // });
         let device =  {
             id: 1,
+            name : "Bulb 1",
             status: true,
-            place: "Bathroom",
-            brightness: 25
+            place: "Kitchen",
+            brightness: 25,
+            description: "And produce say the ten moments parties. Simple innate summer fat appear basket his desire joy. Outward clothes promise at gravity do excited. Sufficient particular impossible by reasonable oh expression is."
         };
         yield put(changeBrightnessSuccess(device));
     }

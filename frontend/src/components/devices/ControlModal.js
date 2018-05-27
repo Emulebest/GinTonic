@@ -1,14 +1,15 @@
 // @flow
 
 import React, {Component} from "react";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Container } from 'reactstrap';
 import SwitchButton from 'lyef-switch-button';
 import CustomSlider from "./Slider";
 
 import type {Node} from 'react';
 import type {Device} from "../../types/devices/devices";
 
-import "../../style/toggleButton.css"
+import "../../style/toggleButton.css";
+import "../../style/ControlPanel.css"
 
 
 type ControlProps = {
@@ -47,19 +48,44 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
             <Modal isOpen={isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Control panel</ModalHeader>
                 <ModalBody>
-                    This is constol panel
-                    <SwitchButton
-                        id="my-button"
-                        labelLeft="OFF"
-                        labelRight="ON"
-                        isChecked={status}
-                        action={this.changeSwitchDevice}
-                    />
-                    <CustomSlider
-                        id={id}
-                        brightness={brightness}
-                        changeBrightness={this.changeBrightnessDevice}
-                    />
+                   <Container>
+                       <Row className="panel-row">
+                           <Col md="4">
+                               <h6>NAME</h6>
+                           </Col>
+                           <Col md="7">
+                               Light1
+                           </Col>
+                       </Row>
+                       <Row className="panel-row">
+                           <Col md="5">
+                               <h6>SWITCH ON/OFF</h6>
+                           </Col>
+                           <Col md="7">
+                               <SwitchButton
+                                   id="my-button"
+                                   labelLeft="OFF"
+                                   labelRight="ON"
+                                   isChecked={status}
+                                   action={this.changeSwitchDevice}
+                               />
+                           </Col>
+                       </Row>
+                       <Row className="panel-row">
+                           <Col md="5">
+                               <h6>BRIGHTNESS</h6>
+                           </Col>
+                           <Col md="7">
+                               <CustomSlider
+                                   id={id}
+                                   brightness={brightness}
+                                   changeBrightness={this.changeBrightnessDevice}
+                               />
+                           </Col>
+                       </Row>
+                   </Container>
+
+
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={toggle}>Do Something</Button>{' '}

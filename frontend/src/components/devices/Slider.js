@@ -15,7 +15,7 @@ type SliderProps = {
 
 type SliderState = {};
 
-const style = {width: 400, margin: 50};
+const style = {width: 250};
 
 class CustomSlider extends Component<SliderProps, SliderState> {
 
