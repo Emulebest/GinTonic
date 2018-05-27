@@ -6,7 +6,7 @@ import ControlModal from "./ControlModal";
 import InfoModal from "./InfoModal";
 
 import type {Node} from 'react';
-import type {Device} from "../../types/devices";
+import type {Device} from "../../types/devices/devices";
 
 import "../../style/Device.css";
 

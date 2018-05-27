@@ -6,7 +6,7 @@ import SwitchButton from 'lyef-switch-button';
 import CustomSlider from "./Slider";
 
 import type {Node} from 'react';
-import type {Device} from "../../types/devices";
+import type {Device} from "../../types/devices/devices";
 
 import "../../style/toggleButton.css"
 
@@ -21,7 +21,6 @@ type ControlState = {};
 class ControlModal extends Component<ControlProps & Device, ControlState> {
 
     callbackFunction(){
-        console.log("TOGGLE")
     }
 
     render() : Node {

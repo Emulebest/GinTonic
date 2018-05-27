@@ -1,8 +1,13 @@
 // @flow
 
-import {ALL_DEVICES_REQUEST, ALL_DEVICES_SUCCESS, ALL_DEVICES_FAILURE} from "../../constants/actionTypes";
+import {
+    SWITCH_REQUEST,
+    SWITCH_FAILURE,
+    SWITCH_SUCCESS
+} from "../../constants/actionTypes";
+
 import type {InitialState} from "../../types/general";
-import type {AllDevicesAction} from "../../types/devices/devices";
+import type {SwitchAction} from "../../types/devices/switch";
 
 const initialState = {
     data: {},
@@ -10,11 +15,11 @@ const initialState = {
     message: null
 };
 
-export default (state: InitialState = initialState, action: AllDevicesAction): InitialState => {
+export default (state: InitialState = initialState, action: SwitchAction): InitialState => {
     switch (action.type) {
-        case ALL_DEVICES_REQUEST :
+        case SWITCH_REQUEST:
             return {...state, isFetching: true};
-        case ALL_DEVICES_SUCCESS:
+        case SWITCH_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
@@ -22,14 +27,14 @@ export default (state: InitialState = initialState, action: AllDevicesAction): I
                 message: null,
                 status: 200
             };
-        case ALL_DEVICES_FAILURE:
+        case SWITCH_FAILURE:
             return {
                 ...state,
                 ...action.payload,
                 isFetching: false,
                 data: null
             };
-        default:
+        default :
             return state;
     }
 }

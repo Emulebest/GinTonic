@@ -5,7 +5,7 @@ import {
     ALL_DEVICES_SUCCESS,
     ALL_DEVICES_FAILURE
 } from "../../constants/actionTypes";
-import type {AllDevicesAction, Device} from "../../types/devices";
+import type {AllDevicesAction, Device} from "../../types/devices/devices";
 import type {RequestError} from "../../types/general";
 
 export const getDevices = (userId: number): AllDevicesAction => {
