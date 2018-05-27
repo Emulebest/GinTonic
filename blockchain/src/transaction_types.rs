@@ -26,7 +26,7 @@ impl TransactionType {
                         Ok(TransactionType::SendTransaction)
                     }
                 } else {
-                    Err(TransactionError::new("something wrong with transaction"))
+                    Err(TransactionError::new("something wrong with the transaction"))
                 }
             } else if t.0.contains_key(&"device".to_string()) {
                 Ok(TransactionType::DeviceTransaction)

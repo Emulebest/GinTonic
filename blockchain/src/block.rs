@@ -64,7 +64,7 @@ pub struct Data {
     pub transaction_list: Vec<Transaction>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Transaction(pub HashMap<String, String>);
 
 
@@ -72,7 +72,7 @@ impl Responder for Transaction {
     type Item = HttpResponse;
     type Error = Error;
 
-    fn respond_to(self, req: HttpRequest) -> Result<HttpResponse, Error> {
+    fn respond_to<S>(self, req: &HttpRequest<S>) -> Result<HttpResponse, Error> {
         let body = serde_json::to_string(&self)?;
 
         // Create response and set content type

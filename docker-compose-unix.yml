@@ -5,9 +5,11 @@ services:
     working_dir: /usr/src/myapp
     volumes:
       - ./blockchain:/usr/src/myapp
-    command: cargo run
-    links:
-      - mongo
+    depends_on:
+      - "db"
+    command: ["./wait-for-postgres.sh", "db:5432", "--", "cargo", "run"]
+    ports:
+      - "8081:8081"
 
   golang:
     image: "golang:1.10.2-stretch"
@@ -49,10 +51,3 @@ services:
       POSTGRES_PASSWORD: 123
     expose:
       - "5432"
-
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: pass
