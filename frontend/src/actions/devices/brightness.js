@@ -8,6 +8,7 @@ import {
 import type{RequestError} from "../../types/general";
 import type {SwitchAction} from "../../types/devices/switch";
 import type {BrightnessAction} from "../../types/devices/brightness";
+import type {Device} from "../../types/devices/devices";
 
 export const changeBrightness = (deviceId: number): BrightnessAction => {
     return {
@@ -18,12 +19,11 @@ export const changeBrightness = (deviceId: number): BrightnessAction => {
     }
 };
 
-export const changeBrightnessSuccess = (deviceId: number, message: string): BrightnessAction => {
+export const changeBrightnessSuccess = (device: Device): BrightnessAction => {
     return {
         type: CHANGE_BRIGHTNESS_SUCCESS,
         payload: {
-            deviceId,
-            message
+            device
         }
     }
 };

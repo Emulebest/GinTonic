@@ -7,6 +7,7 @@ import {
 } from "../../constants/actionTypes";
 
 import type {SwitchAction} from "../../types/devices/switch";
+import type {Device} from "../../types/devices/devices";
 import type {RequestError} from "../../types/general";
 
 export const switchDevice = (deviceId: number): SwitchAction => {
@@ -18,12 +19,11 @@ export const switchDevice = (deviceId: number): SwitchAction => {
     }
 };
 
-export const switchDeviceSuccess = (deviceId: number, message: string): SwitchAction => {
+export const switchDeviceSuccess = (device: Device): SwitchAction => {
     return {
         type: SWITCH_SUCCESS,
         payload: {
-            deviceId,
-            message
+            device
         }
     }
 };

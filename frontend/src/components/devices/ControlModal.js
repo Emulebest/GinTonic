@@ -13,18 +13,36 @@ import "../../style/toggleButton.css"
 
 type ControlProps = {
     isOpen: boolean,
-    toggle: (t: any) => any
+    toggle: (t: any) => any,
+    toggleSwitch: (deviceId : number) => void,
+    changeBrightness : (deviceId : number) => void
 };
 
 type ControlState = {};
 
 class ControlModal extends Component<ControlProps & Device, ControlState> {
 
-    callbackFunction(){
+    constructor(props : ControlProps & Device){
+        super(props);
+        const self: any = this;
+        self.changeSwitchDevice = this.changeSwitchDevice.bind(this);
+        self.changeBrightnessDevice = this.changeBrightnessDevice.bind(this);
+    }
+
+    changeSwitchDevice(){
+        let {toggleSwitch} = this.props;
+        let {id} = this.props;
+        toggleSwitch(id);
+    }
+
+    changeBrightnessDevice(){
+        let {changeBrightness} = this.props;
+        let {id} = this.props;
+        changeBrightness(id);
     }
 
     render() : Node {
-        let {isOpen, toggle, status, brightness} = this.props;
+        let {id, isOpen, toggle, status, brightness} = this.props;
         return (
             <Modal isOpen={isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Control panel</ModalHeader>
@@ -35,9 +53,13 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
                         labelLeft="OFF"
                         labelRight="ON"
                         isChecked={status}
-                        action={this.callbackFunction}
+                        action={this.changeSwitchDevice}
                     />
-                    <CustomSlider brightness={brightness}/>
+                    <CustomSlider
+                        id={id}
+                        brightness={brightness}
+                        changeBrightness={this.changeBrightnessDevice}
+                    />
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={toggle}>Do Something</Button>{' '}

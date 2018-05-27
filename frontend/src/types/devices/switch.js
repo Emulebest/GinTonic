@@ -1,6 +1,7 @@
 // @flow
 
 import {SWITCH_REQUEST, SWITCH_FAILURE, SWITCH_SUCCESS} from "../../constants/actionTypes";
+import type{Device} from "./devices";
 
 const SWITCH_ACTIONS = {
     SWITCH_REQUEST, SWITCH_FAILURE, SWITCH_SUCCESS
@@ -16,8 +17,7 @@ type SwitchRequest = {
 type SwitchSuccess = {
     type: $Values<typeof SWITCH_ACTIONS>,
     payload: {
-        deviceId: number,
-        message: string
+        device: Device
     }
 };
 

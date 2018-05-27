@@ -7,8 +7,6 @@ import {switchDeviceSuccess, switchDeviceFailure} from "../../actions/devices/sw
 import {BASE_URL} from "../../constants/baseUrl";
 
 export default function* switchDevice({payload}: { payload: { deviceId: number } }): Generator<IOEffect, void, any> {
-    let {deviceId} = payload;
-    let message = "Successfully switched";
     try {
         // const res = yield call(axios, {
         //     url: `${BASE_URL}/devices`,
@@ -18,8 +16,14 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         //         'content-type': 'application/json',
         //     }
         // });
-        
-        yield put(switchDeviceSuccess(deviceId, message));
+        let device = {
+            id: 2,
+            status: false,
+            place: "Bathroom",
+            brightness: 0
+        };
+
+        yield put(switchDeviceSuccess(device));
     }
     catch (error) {
         yield put(switchDeviceFailure(error));

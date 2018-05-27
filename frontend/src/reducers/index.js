@@ -5,7 +5,7 @@ import {reducer as formReducer} from 'redux-form'
 import {routerReducer} from "react-router-redux"
 
 import authReducer from "./auth";
-import deviceReducer from "./devices";
+import deviceReducer from "./devices/all";
 
 const rootReducer = combineReducers({
     auth: authReducer,

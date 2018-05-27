@@ -6,6 +6,8 @@ import {
     CHANGE_BRIGHTNESS_FAILURE
 } from "../../constants/actionTypes";
 
+import type{Device} from "./devices";
+
 const BRIGHTNESS_ACTIONS = {
     CHANGE_BRIGHTNESS_REQUEST,
     CHANGE_BRIGHTNESS_SUCCESS,
@@ -22,8 +24,7 @@ type BrightnessRequest = {
 type BrightnessSuccess = {
     type: $Values<typeof BRIGHTNESS_ACTIONS>,
     payload: {
-        deviceId: number,
-        message: string
+        device: Device
     }
 };
 

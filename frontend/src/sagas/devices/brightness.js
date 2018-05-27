@@ -18,8 +18,13 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
         //         'content-type': 'application/json',
         //     }
         // });
-
-        yield put(changeBrightnessSuccess(deviceId, message));
+        let device =  {
+            id: 1,
+            status: true,
+            place: "Bathroom",
+            brightness: 25
+        };
+        yield put(changeBrightnessSuccess(device));
     }
     catch (error) {
         yield put(changeBrightnessError(error));

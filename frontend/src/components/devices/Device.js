@@ -10,6 +10,10 @@ import type {Device} from "../../types/devices/devices";
 
 import "../../style/Device.css";
 
+type DeviceProps = {
+    toggleSwitch : (deviceId : number) => void,
+    changeBrightness : (deviceId : number) => void
+}
 
 type DeviceState = {
     imgArr: Array<string>,
@@ -18,9 +22,9 @@ type DeviceState = {
     modalInfo: boolean
 };
 
-class DeviceBlock extends Component<Device, DeviceState> {
+class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
 
-    constructor(props: Device) {
+    constructor(props: Device & DeviceProps) {
         super(props);
         const self: any = this;
         this.state = {
@@ -64,7 +68,6 @@ class DeviceBlock extends Component<Device, DeviceState> {
     render(): Node {
         let imgIndex: number = Math.floor(Math.random() * this.state.lightParams.length);
         let img: string = this.state.imgArr[imgIndex];
-
         return (
             <Col md="4" className="container-device">
                 <Container className="container-device-content">

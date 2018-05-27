@@ -1,5 +1,7 @@
 // @flow
 import {ALL_DEVICES_REQUEST, ALL_DEVICES_SUCCESS, ALL_DEVICES_FAILURE} from "../../constants/actionTypes";
+import type {SwitchAction} from "./switch";
+import type {BrightnessAction} from "./brightness";
 
 const ALL_DEVICES_ACTIONS = {
     ALL_DEVICES_REQUEST, ALL_DEVICES_FAILURE, ALL_DEVICES_SUCCESS
