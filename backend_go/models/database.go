@@ -1,6 +1,7 @@
 package models
 
 import "github.com/jinzhu/gorm"
+import _ "github.com/jinzhu/gorm/dialects/postgres"
 
 var database *gorm.DB
 var err error
@@ -16,6 +17,10 @@ func InitializeDB() error {
 	}
 
 	return err
+}
+
+func CloseDB() {
+	database.Close()
 }
 
 func ClearDB() {

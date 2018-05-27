@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"strconv"
 	"errors"
-	"strings"
+	"regexp"
 )
 
 func generateSessionToken() string {
@@ -13,51 +13,50 @@ func generateSessionToken() string {
 }
 
 type User struct {
-	ID       uint   `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Token    string `json:"token"`
-}
-
-// A local array to store the registered users
-var userList = []User{
-	{0, "admin", "qwerty", ""},
+	ID         uint   `json:"id"       gorm:"primary_key"`
+	Username   string `json:"username" gorm:"unique;not null"`
+	Password   string `json:"password"`
+	Token      string `json:"token"    gorm:"unique;not null"`
+	FirstName  string `json:"firstName"`
+	SecondName string `json:"secondName"`
+	Email      string `json:"email"`
 }
 
 func RegisterUser(username, password string) (*User, error) {
 
-	if strings.TrimSpace(username) == "" {
-		return nil, errors.New("the username can't be empty")
+	usernameRegexp, _ := regexp.Compile("^\\w{4,15}$")
+
+	if !usernameRegexp.MatchString(username) {
+		return nil, errors.New("the username must contain from 4 to 15 characters that are digits, letters, or underscore")
 	}
 
-	if strings.TrimSpace(password) == "" {
-		return nil, errors.New("the password can't be empty")
+	passwordRegexp, _ := regexp.Compile("^\\w{4,15}$")
+
+	if !passwordRegexp.MatchString(password) {
+		return nil, errors.New("the password must contain from 4 to 15 characters that are digits, letters, or underscore")
 	}
 
-	for _, currentUser := range userList {
-		if currentUser.Username == username {
-			return nil, errors.New("the username isn't available")
-		}
+	// TODO: Check for unique username because annotation doesn't work
+
+	newUser := User{
+		0,
+		username,
+		password,
+		generateSessionToken(),
+		"",
+		"",
+		"",
 	}
 
-	newUser := User{uint(len(userList)), username, password, generateSessionToken()}
-
-	userList = append(userList, newUser)
+	// the function recounts the ID by itself
+	database.Create(&newUser)
 
 	return &newUser, nil
 }
 
-// Checks the given username/password combination and return token,
-// if the combination is correct
 func LoginUser(username, password string) (*User, error) {
 
-	for i := 0; i < len(userList); i++ {
-		if userList[i].Username == username && userList[i].Password == password {
-			userList[i].Token = generateSessionToken()
-			result := userList[i]
-			return &result, nil
-		}
-	}
+	// TODO: All is todo
 
 	return nil, errors.New("the username/password combination is incorrect")
 }

@@ -5,7 +5,6 @@ import (
 	"./models"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
 )
 
 func initializeRoutes() *gin.Engine {
@@ -25,13 +24,16 @@ func initializeRoutes() *gin.Engine {
 }
 
 func main() {
+
 	err := models.InitializeDB()
+	defer models.CloseDB()
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return
-	} else {
-		fmt.Println("Database connection OK")
 	}
+
+	fmt.Println("[VADYM] Successfully connected to the Postgres DB.")
 
 	router := initializeRoutes()
 	router.Run()
