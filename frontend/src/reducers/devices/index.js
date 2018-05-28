@@ -6,7 +6,9 @@ import {
     ALL_DEVICES_FAILURE,
     SWITCH_REQUEST,
     SWITCH_SUCCESS,
-    SWITCH_FAILURE, CHANGE_BRIGHTNESS_REQUEST, CHANGE_BRIGHTNESS_SUCCESS, CHANGE_BRIGHTNESS_FAILURE
+    SWITCH_FAILURE, CHANGE_BRIGHTNESS_REQUEST, CHANGE_BRIGHTNESS_SUCCESS, CHANGE_BRIGHTNESS_FAILURE,
+    ADD_DEVICE_REQUEST, ADD_DEVICE_SUCCESS, ADD_DEVICE_FAILURE,
+    DELETE_DEVICE_REQUEST, DELETE_DEVICE_FAILURE, DELETE_DEVICE_SUCCESS
 } from "../../constants/actionTypes";
 
 import type {InitialState} from "../../types/general";
@@ -14,6 +16,8 @@ import type {InitialState} from "../../types/general";
 import switchReducer from "./switch";
 import brightnessReducer from "./brightness";
 import getAllReducer from "./getAll";
+import addDeviceReducer from "./add";
+import deleteDeviceReducer from "./delete";
 
 const initialState = {
     data: {},
@@ -39,6 +43,14 @@ const deviceReducers: Array<Reducer> = [
     {
         types: [CHANGE_BRIGHTNESS_REQUEST, CHANGE_BRIGHTNESS_FAILURE, CHANGE_BRIGHTNESS_SUCCESS],
         method: brightnessReducer
+    },
+    {
+        types: [ADD_DEVICE_REQUEST, ADD_DEVICE_SUCCESS, ADD_DEVICE_FAILURE],
+        method: addDeviceReducer
+    },
+    {
+        types: [DELETE_DEVICE_REQUEST, DELETE_DEVICE_FAILURE, DELETE_DEVICE_SUCCESS],
+        method: deleteDeviceReducer
     }
 
 ];
@@ -47,8 +59,8 @@ const getActionIndex = (types: Array<string>, actionType: string): number => {
     return types.indexOf(actionType);
 };
 
-const getReducer = (actionType : string) : Array<Reducer> => {
-    return deviceReducers.filter((groupObj : Reducer) => {
+const getReducer = (actionType: string): Array<Reducer> => {
+    return deviceReducers.filter((groupObj: Reducer) => {
         return getActionIndex(groupObj.types, actionType) !== -1;
     });
 };

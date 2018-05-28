@@ -14,7 +14,8 @@ export const changeBrightness = (deviceId: number, brightness : number): Brightn
     return {
         type: CHANGE_BRIGHTNESS_REQUEST,
         payload: {
-            deviceId
+            deviceId,
+            brightness
         }
     }
 };
