@@ -1,9 +1,11 @@
 // @flow
 
 import React, {Component} from "react";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, UncontrolledTooltip } from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, UncontrolledTooltip} from 'reactstrap';
 import SwitchButton from 'lyef-switch-button';
 import CustomSlider from "./Slider";
+
+import {Icon} from "react-fa";
 
 import type {Node} from 'react';
 import type {Device} from "../../types/devices/devices";
@@ -16,10 +18,11 @@ type ControlProps = {
     isOpen: boolean,
     toggle: (t: any) => any,
     toggleSwitch: (deviceId: number) => void,
-    changeBrightness: (deviceId: number, brightness : number) => void,
+    changeBrightness: (deviceId: number, brightness: number) => void,
+    deleteDevice: (deviceId: number) => void,
     img: string,
     name: string,
-    place : string
+    place: string
 };
 
 type ControlState = {};
@@ -31,6 +34,7 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
         const self: any = this;
         self.changeSwitchDevice = this.changeSwitchDevice.bind(this);
         self.changeBrightnessDevice = this.changeBrightnessDevice.bind(this);
+        self.deleteDevice = this.deleteDevice.bind(this);
     }
 
     changeSwitchDevice() {
@@ -39,10 +43,16 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
         toggleSwitch(id);
     }
 
-    changeBrightnessDevice(brightness : number) {
+    changeBrightnessDevice(brightness: number) {
         let {changeBrightness} = this.props;
         let {id} = this.props;
         changeBrightness(id, brightness);
+    }
+
+    deleteDevice() {
+        let {deleteDevice, id} = this.props;
+        deleteDevice(id);
+        this.props.toggle();
     }
 
     render(): Node {
@@ -105,10 +115,16 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
                     </Table>
                 </ModalBody>
                 < ModalFooter>
-                    < Button
-                        color="primary"
-                        onClick={toggle}> Save </Button>
                     <Button color="secondary" onClick={toggle}>Close</Button>
+                    <Button id="deleteTooltip" color="danger" onClick={this.deleteDevice}>
+                        <Icon name="trash"/> Delete
+                    </Button>
+                    <Button
+                        color="success"
+                        onClick={toggle}> Save </Button>
+                    <UncontrolledTooltip placement="top" target="deleteTooltip">
+                        By clicking delete you won't be able to return your device. Are you sure?
+                    </UncontrolledTooltip>
                 </ModalFooter>
             </Modal>
         )

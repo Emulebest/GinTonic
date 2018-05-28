@@ -2,7 +2,7 @@
 
 import lodash from "lodash";
 import React, {Component} from "react";
-import {Container, Row, Jumbotron, Button, Col, UncontrolledTooltip } from "reactstrap";
+import {Container, Row, Jumbotron, Button, Col, UncontrolledTooltip} from "reactstrap";
 import type {Node} from 'react';
 import DeviceBlock from "./Device";
 import type {Device} from "../../types/devices/devices";
@@ -12,20 +12,21 @@ import {changeBrightness} from "../../actions/devices/brightness";
 import type{Dispatch} from "../../types/general";
 import AddModal from "./AddModal";
 import {addDevice} from "../../actions/devices/add";
+import {deleteDevice} from "../../actions/devices/delete";
 
 
 type DeviceContainerProps = {
     devices: Array<Device>,
     dispatch: Dispatch,
-    toggleSwitch : (deviceId : number) => void
+    toggleSwitch: (deviceId: number) => void
 };
 type DeviceContainerState = {
-    modalAdd : boolean
+    modalAdd: boolean
 };
 
 class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerState> {
 
-    constructor(props : DeviceContainerProps){
+    constructor(props: DeviceContainerProps) {
         super(props);
 
         this.state = {
@@ -37,6 +38,7 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         self.changeBrightness = this.changeBrightness.bind(this);
         self.toggleAddModal = this.toggleAddModal.bind(this);
         self.addDevice = this.addDevice.bind(this);
+        self.deleteDevice = this.deleteDevice.bind(this);
     }
 
     componentWillMount() {
@@ -44,11 +46,11 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         this.props.dispatch(getDevices(userId));
     }
 
-    toggleSwitch(deviceId : number){
+    toggleSwitch(deviceId: number) {
         this.props.dispatch(switchDevice(deviceId));
     }
 
-    changeBrightness(deviceId : number, brightness : number){
+    changeBrightness(deviceId: number, brightness: number) {
         this.props.dispatch(changeBrightness(deviceId, brightness));
     }
 
@@ -56,27 +58,30 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         return lodash.chunk(this.props.devices, 3);
     }
 
-    toggleAddModal(){
-        console.log("IN toggle modal");
+    toggleAddModal() {
         this.setState({
             modalAdd: !this.state.modalAdd
         });
     }
 
-    addDevice(data : Device){
-        console.log("NEW DEVICE", data);
+    addDevice(data: Device) {
         this.props.dispatch(addDevice(data));
         this.toggleAddModal();
     }
 
-    renderNested = (row: Array<Device>):Array<Node> => {
+    deleteDevice(deviceId: number) {
+        this.props.dispatch(deleteDevice(deviceId));
+    }
+
+    renderNested = (row: Array<Device>): Array<Node> => {
         return (
-            row.map((device : Device) => {
+            row.map((device: Device) => {
                 let {id} = device;
                 return (
                     <DeviceBlock
                         key={id}
                         {...device}
+                        deleteDevice={this.deleteDevice}
                         toggleSwitch={this.toggleSwitch}
                         changeBrightness={this.changeBrightness}
                     />

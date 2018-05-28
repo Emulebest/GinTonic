@@ -6,17 +6,20 @@ import {
     ALL_DEVICES_REQUEST,
     SWITCH_REQUEST,
     CHANGE_BRIGHTNESS_REQUEST,
-    ADD_DEVICE_REQUEST
+    ADD_DEVICE_REQUEST,
+    DELETE_DEVICE_REQUEST
 } from "../../constants/actionTypes";
 
 import getAllDevices from "./all";
 import switchDevice from "./switch";
 import changeBrightness from "./brightness";
 import addDevice from "./add";
+import deleteDevice from "./delete";
 
 export default function* devices(): Generator<IOEffect, void, any> {
     yield takeEvery(ALL_DEVICES_REQUEST, getAllDevices);
     yield takeEvery(SWITCH_REQUEST, switchDevice);
     yield takeEvery(CHANGE_BRIGHTNESS_REQUEST, changeBrightness);
-    yield takeEvery(ADD_DEVICE_REQUEST, addDevice); 
+    yield takeEvery(ADD_DEVICE_REQUEST, addDevice);
+    yield takeEvery(DELETE_DEVICE_REQUEST, deleteDevice);
 }

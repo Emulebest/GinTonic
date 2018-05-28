@@ -18,7 +18,8 @@ type DeviceProps = {
     place : string,
     name : string,
     description : string,
-    status : boolean
+    status : boolean,
+    deleteDevice: (deviceId : number) => void
 }
 
 type DeviceState = {
@@ -120,6 +121,7 @@ class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
                         <ControlModal
                             img={img}
                             {...this.props}
+                            deleteDevice={this.props.deleteDevice}
                             isOpen={this.state.modalControl}
                             toggle={this.toggleControl}/>
                         <InfoModal
