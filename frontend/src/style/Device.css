@@ -1,0 +1,46 @@
+.container-device {
+    height: 200px;
+}
+
+.jumbotron {
+    background-color: white !important;
+}
+
+.container-device-content {
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px;
+    border: 2px solid  #ff9739;
+    height: 100%;
+}
+
+.light-param {
+    padding: 0 !important;
+}
+
+.device-content {
+    height: 70%;
+}
+
+.row-devices {
+    margin-bottom: 3%;
+}
+
+.control-panel {
+    height: 30%;
+    margin-top: 10px;
+}
+
+.switch-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+}
+
+.indicator-green {
+    background-color: var(--status-on) !important;
+}
+
+.indicator-red {
+    background-color: var(--status-off) !important;
+}

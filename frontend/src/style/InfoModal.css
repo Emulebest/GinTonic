@@ -1,0 +1,32 @@
+.modal-title{
+    width: 100%;
+    text-align: center;
+}
+
+tr > th:nth-child(1){
+    color: var(--main-color-orange);
+}
+
+.switch-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    background-color: var(--status-on);
+}
+
+.indicator-green {
+    background-color: var(--status-on) !important;
+}
+
+.indicator-red {
+    background-color: var(--status-off) !important;
+}
+
+.status-panel td div{
+    display: inline-block;
+}
+.status-panel td div:first-child{
+    margin-right: 10px;
+}
+
+

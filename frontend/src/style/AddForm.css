@@ -1,0 +1,11 @@
+.btn-add-container{
+    text-align: center;
+}
+
+.btn-add-device-submit{
+    width: 250px;
+}
+
+form label{
+    color : var(--main-color-orange);
+}

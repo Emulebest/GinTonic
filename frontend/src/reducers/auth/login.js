@@ -10,7 +10,7 @@ import type {LoginAction, LogoutAction} from "../../types/auth/login";
 
 const initialState = {
     data: {},
-    status : null,
+    status: null,
     message: null
 };
 
@@ -24,7 +24,7 @@ export default (state: InitialState = initialState, action: LoginAction | Logout
                 isFetching: false,
                 data: action.payload,
                 message: null,
-                error: null
+                status: 200
             };
         case LOGIN_FAILURE:
             return {
@@ -35,7 +35,7 @@ export default (state: InitialState = initialState, action: LoginAction | Logout
 
             };
         case LOGOUT:
-            return {...state, token: null};
+            return {...state};
         default:
             return state;
     }

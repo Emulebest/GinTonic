@@ -1,0 +1,32 @@
+.panel-row{
+    margin-bottom : 30px;
+}
+
+.rc-slider-rail, .rc-slider-track{
+    height: 8px;
+}
+
+.slider-container{
+    width : 300px;
+}
+
+.rc-slider-track{
+    background-color:#abe2fb;
+}
+
+.rc-slider-dot{
+    width: 15px;
+    height: 15px;
+    bottom: -6px;
+    margin-left: -4px;
+}
+
+.rc-slider-handle{
+    width: 20px;
+    height: 20px;
+    bottom: -4px;
+}
+
+th a {
+    color : #007bff !important;
+}

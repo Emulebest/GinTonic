@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import type {Node} from 'react';
 import {Redirect} from 'react-router-dom';
 
-import LoginForm from "./forms/LoginForm";
+import LoginForm from "./LoginForm";
 import {login} from "../../actions/auth/login";
 
 import type {LoginCredentials} from "../../types/auth/login";

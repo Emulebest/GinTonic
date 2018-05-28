@@ -1,26 +1,21 @@
 // @flow
+
 import {
-    REGISTER_REQUEST,
-    REGISTER_SUCCESS,
-    REGISTER_FAILURE
+    ALL_DEVICES_REQUEST,
+    ALL_DEVICES_FAILURE,
+    ALL_DEVICES_SUCCESS
 } from "../../constants/actionTypes";
+
 import type {InitialState} from "../../types/general";
-import type {RegisterAction} from "../../types/auth/register";
 
-const initialState = {
-    data: {},
-    status : null,
-    message: null
-};
-
-export default (state: InitialState = initialState, action: RegisterAction) => {
+export default (state: InitialState, action: any): InitialState => {
     switch (action.type) {
-        case REGISTER_REQUEST :
+        case ALL_DEVICES_REQUEST:
             return {
                 ...state,
                 isFetching: true
             };
-        case REGISTER_SUCCESS:
+        case ALL_DEVICES_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
@@ -28,7 +23,7 @@ export default (state: InitialState = initialState, action: RegisterAction) => {
                 message: null,
                 status: 200
             };
-        case REGISTER_FAILURE:
+        case ALL_DEVICES_FAILURE:
             return {
                 ...state,
                 ...action.payload,

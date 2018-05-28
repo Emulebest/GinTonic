@@ -1,34 +1,30 @@
 // @flow
+
 import {
-    REGISTER_REQUEST,
-    REGISTER_SUCCESS,
-    REGISTER_FAILURE
+    DELETE_DEVICE_REQUEST,
+    DELETE_DEVICE_FAILURE,
+    DELETE_DEVICE_SUCCESS
 } from "../../constants/actionTypes";
+
 import type {InitialState} from "../../types/general";
-import type {RegisterAction} from "../../types/auth/register";
 
-const initialState = {
-    data: {},
-    status : null,
-    message: null
-};
 
-export default (state: InitialState = initialState, action: RegisterAction) => {
+export default (state: InitialState, action: any): InitialState => {
     switch (action.type) {
-        case REGISTER_REQUEST :
+        case DELETE_DEVICE_REQUEST:
             return {
                 ...state,
                 isFetching: true
             };
-        case REGISTER_SUCCESS:
+        case DELETE_DEVICE_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                data: action.payload,
+                data: deleteDevice(state.data.devices, action.payload.deviceId),
                 message: null,
                 status: 200
             };
-        case REGISTER_FAILURE:
+        case DELETE_DEVICE_FAILURE:
             return {
                 ...state,
                 ...action.payload,
@@ -39,3 +35,11 @@ export default (state: InitialState = initialState, action: RegisterAction) => {
             return state;
     }
 }
+
+const deleteDevice = (devices, deviceId) => {
+    return {
+        devices: devices.filter((device) => {
+            return device.id !== deviceId
+        })
+    }
+};

@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import type {Node} from 'react';
 
-import RegisterFrom from "./forms/RegisterForm";
+import RegisterFrom from "./RegisterForm";
 import {register} from "../../actions/auth/register";
 import type {Dispatch} from "../../types/general";
 import type {RegisterCredentials} from "../../types/auth/register";

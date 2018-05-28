@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {Input, Form, FormGroup, Button, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap";
 
 
-import "../../../style/Auth.css";
+import "../../style/Auth.css";
 
 let LoginForm = (props) => {
     const {handleSubmit} = props;

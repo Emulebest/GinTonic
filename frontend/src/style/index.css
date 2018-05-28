@@ -1,16 +1,27 @@
 :root {
-    --main-color-orange:#ff9739 ;
-    --secondary-color-blue:#19aa8d;
-    --main-font : 'Nunito', sans-serif;
-    --auth-gradient :linear-gradient(to bottom, #ff9739, #ffa43c, #ffb041, #febc48, #fdc850);
+    --main-color-orange: #ff9739;
+    --secondary-color-blue: #19aa8d;
+    --main-font: 'Nunito', sans-serif;
+    --auth-gradient: linear-gradient(to bottom, #ff9739, #ffa43c, #ffb041, #febc48, #fdc850);
+    --status-off: #fa1414;
+    --status-on: #148414;
 }
 
 body {
     font-family: var(--main-font);
 }
 
-.jumbotron{
+.jumbotron {
     border-radius: 0;
     margin-bottom: 0;
+}
+
+.btn-add-device{
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
 }
 
