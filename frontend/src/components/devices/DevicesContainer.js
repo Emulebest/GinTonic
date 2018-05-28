@@ -57,6 +57,7 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
     }
 
     toggleAddModal(){
+        console.log("IN toggle modal");
         this.setState({
             modalAdd: !this.state.modalAdd
         });
@@ -76,7 +77,7 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
                     <DeviceBlock
                         key={id}
                         {...device}
-                        toggleSwitch={this.toggleAddModal}
+                        toggleSwitch={this.toggleSwitch}
                         changeBrightness={this.changeBrightness}
                     />
                 )

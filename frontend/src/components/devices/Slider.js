@@ -36,6 +36,7 @@ class CustomSlider extends Component<SliderProps, SliderState> {
     }
 
     render(): Node {
+        console.log("SLIDER REREDNDE", this.props.brightness);
         let {brightness} = this.props;
         let marks = CustomSlider.getMarks(25);
         return (
@@ -46,7 +47,7 @@ class CustomSlider extends Component<SliderProps, SliderState> {
                     marks={marks}
                     step={25}
                     onChange={this.handleSliderChange}
-                    defaultValue={brightness}/>
+                    value={brightness}/>
             </div>
         )
     }
