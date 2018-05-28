@@ -12,7 +12,7 @@ import "../../style/Device.css";
 
 type DeviceProps = {
     toggleSwitch : (deviceId : number) => void,
-    changeBrightness : (deviceId : number) => void,
+    changeBrightness : (deviceId : number, brightness : number) => void,
     id : number,
     brightness : number,
     place : string,
@@ -72,7 +72,7 @@ class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
     }
 
     render(): Node {
-        let imgIndex: number = Math.floor(Math.random() * this.state.lightParams.length);
+        let imgIndex: number = this.props.id % this.state.imgArr.length;
         let img: string = this.state.imgArr[imgIndex];
         return (
             <Col md="4" className="container-device">
@@ -85,10 +85,10 @@ class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
                         <Col md="5">
                             <Row>
                                 {
-                                    this.state.lightParams.map(lightParam => {
+                                    this.state.lightParams.map((lightParam, i) => {
                                         let paramVal: string = this.props[lightParam];
                                         return (
-                                            <React.Fragment>
+                                            <React.Fragment key={i}>
                                                 <Col md="5" className="light-param">
                                                     <h5>{lightParam[0].toUpperCase() + " :"}</h5>
                                                 </Col>
@@ -117,9 +117,11 @@ class DeviceBlock extends Component<Device & DeviceProps, DeviceState> {
                         <Col md="6">
                             <Button onClick={this.toggleControl} color="success" block>CONTROL</Button>
                         </Col>
-                        <ControlModal {...this.props}
-                                      isOpen={this.state.modalControl}
-                                      toggle={this.toggleControl}/>
+                        <ControlModal
+                            img={img}
+                            {...this.props}
+                            isOpen={this.state.modalControl}
+                            toggle={this.toggleControl}/>
                         <InfoModal
                             {...this.props}
                             img={img}

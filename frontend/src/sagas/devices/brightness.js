@@ -1,14 +1,12 @@
 // @flow
 
-import {put, call} from 'redux-saga/effects';
+import {put/*, call */} from 'redux-saga/effects';
 import type {IOEffect} from 'redux-saga/effects';
-import axios from "axios";
+//import axios from "axios";
 import {changeBrightnessSuccess, changeBrightnessError} from "../../actions/devices/brightness";
-import {BASE_URL} from "../../constants/baseUrl";
+//import {BASE_URL} from "../../constants/baseUrl";
 
 export default function* changeBrightness({payload}: { payload: { deviceId: number } }): Generator<IOEffect, void, any> {
-    let {deviceId} = payload;
-    let message = "Successfully changed brightness";
     try {
         // const res = yield call(axios, {
         //     url: `${BASE_URL}/devices`,
@@ -20,7 +18,7 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
         // });
         let device =  {
             id: 1,
-            name : "Bulb 1",
+            name: "Bulb 1",
             status: true,
             place: "Kitchen",
             brightness: 25,

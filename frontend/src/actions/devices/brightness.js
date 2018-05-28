@@ -10,7 +10,7 @@ import type {SwitchAction} from "../../types/devices/switch";
 import type {BrightnessAction} from "../../types/devices/brightness";
 import type {Device} from "../../types/devices/devices";
 
-export const changeBrightness = (deviceId: number): BrightnessAction => {
+export const changeBrightness = (deviceId: number, brightness : number): BrightnessAction => {
     return {
         type: CHANGE_BRIGHTNESS_REQUEST,
         payload: {

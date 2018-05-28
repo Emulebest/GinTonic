@@ -5,7 +5,6 @@ import {
     SWITCH_SUCCESS,
     SWITCH_FAILURE
 } from "../../constants/actionTypes";
-import type {SwitchAction} from "../../types/devices/switch";
 
 import type {InitialState} from "../../types/general";
 

@@ -8,14 +8,11 @@ import type {Node} from 'react';
 import 'rc-slider/assets/index.css';
 
 type SliderProps = {
-    id: number,
     brightness: number,
-    changeBrightness: (deviceId: number) => void
+    changeBrightness: (brightness : number) => void
 };
 
 type SliderState = {};
-
-const style = {width: 250};
 
 class CustomSlider extends Component<SliderProps, SliderState> {
 
@@ -28,26 +25,21 @@ class CustomSlider extends Component<SliderProps, SliderState> {
     static getMarks(step: number) {
         let marks = {};
         for (let i = 0; i <= 100; i += step) {
-            marks[i] = (i === 0 || i === 100) ? {
-                style: {
-                    color: 'red',
-                },
-                label: <strong>{`${i}%`}</strong>,
-            } : `${i}%`;
+            marks[i] =  `${i}%`;
         }
         return marks;
     }
 
-    handleSliderChange() {
-        let {changeBrightness, id} = this.props;
-        changeBrightness(id);
+    handleSliderChange(brightness : number) {
+        let {changeBrightness} = this.props;
+        changeBrightness(brightness);
     }
 
     render(): Node {
         let {brightness} = this.props;
         let marks = CustomSlider.getMarks(25);
         return (
-            <div style={style}>
+            <div className="slider-container">
                 <Slider
                     dots
                     min={0}

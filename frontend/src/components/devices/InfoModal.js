@@ -25,11 +25,11 @@ class InfoModal extends Component<InfoProps, InfoState> {
         return (
             <Modal isOpen={isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>
-                    <img src={this.props.img} width="80px" height="80px"/>
+                    <img src={this.props.img} alt={name} width="80px" height="80px"/>
                 </ModalHeader>
                 <ModalBody>
                     <Table borderless>
-                        <body>
+                        <tbody>
                         <tr>
                             <th>NAME</th>
                             <td>{name}</td>
@@ -38,7 +38,11 @@ class InfoModal extends Component<InfoProps, InfoState> {
                             <th>PLACE</th>
                             <td>{place}</td>
                         </tr>
-                        <hr/>
+                        <tr>
+                            <td colSpan={2}>
+                                <hr/>
+                            </td>
+                        </tr>
                         <tr className="status-panel">
                             <th>STATUS</th>
                             <td>
@@ -54,12 +58,16 @@ class InfoModal extends Component<InfoProps, InfoState> {
                             <th>BRIGHTNESS</th>
                             <td>{brightness + "%"}</td>
                         </tr>
-                        <hr/>
+                        <tr>
+                            <td colSpan={2}>
+                                <hr/>
+                            </td>
+                        </tr>
                         <tr>
                             <th>DESCRIPTION</th>
                             <td>{description}</td>
                         </tr>
-                        </body>
+                        </tbody>
                     </Table>
                 </ModalBody>
                 <ModalFooter>

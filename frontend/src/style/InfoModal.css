@@ -11,15 +11,15 @@ tr > th:nth-child(1){
     width: 20px;
     height: 20px;
     border-radius: 500px;
-    background-color: green;
+    background-color: var(--status-on);
 }
 
 .indicator-green {
-    background-color: green !important;
+    background-color: var(--status-on) !important;
 }
 
 .indicator-red {
-    background-color: red !important;
+    background-color: var(--status-off) !important;
 }
 
 .status-panel td div{

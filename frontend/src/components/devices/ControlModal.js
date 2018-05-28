@@ -1,7 +1,7 @@
 // @flow
 
 import React, {Component} from "react";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Container } from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, UncontrolledTooltip } from 'reactstrap';
 import SwitchButton from 'lyef-switch-button';
 import CustomSlider from "./Slider";
 
@@ -10,86 +10,105 @@ import type {Device} from "../../types/devices/devices";
 
 import "../../style/toggleButton.css";
 import "../../style/ControlPanel.css"
-
+import "../../style/InfoModal.css";
 
 type ControlProps = {
     isOpen: boolean,
     toggle: (t: any) => any,
-    toggleSwitch: (deviceId : number) => void,
-    changeBrightness : (deviceId : number) => void
+    toggleSwitch: (deviceId: number) => void,
+    changeBrightness: (deviceId: number, brightness : number) => void,
+    img: string,
+    name: string,
+    place : string
 };
 
 type ControlState = {};
 
 class ControlModal extends Component<ControlProps & Device, ControlState> {
 
-    constructor(props : ControlProps & Device){
+    constructor(props: ControlProps & Device) {
         super(props);
         const self: any = this;
         self.changeSwitchDevice = this.changeSwitchDevice.bind(this);
         self.changeBrightnessDevice = this.changeBrightnessDevice.bind(this);
     }
 
-    changeSwitchDevice(){
+    changeSwitchDevice() {
         let {toggleSwitch} = this.props;
         let {id} = this.props;
         toggleSwitch(id);
     }
 
-    changeBrightnessDevice(){
+    changeBrightnessDevice(brightness : number) {
         let {changeBrightness} = this.props;
         let {id} = this.props;
-        changeBrightness(id);
+        changeBrightness(id, brightness);
     }
 
-    render() : Node {
-        let {id, isOpen, toggle, status, brightness} = this.props;
+    render(): Node {
+        let {id, isOpen, toggle, status, brightness, name, place} = this.props;
         return (
             <Modal isOpen={isOpen} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Control panel</ModalHeader>
+                <ModalHeader toggle={toggle}>
+                    <img alt={name} src={this.props.img} width="80px" height="80px"/>
+                </ModalHeader>
                 <ModalBody>
-                   <Container>
-                       <Row className="panel-row">
-                           <Col md="4">
-                               <h6>NAME</h6>
-                           </Col>
-                           <Col md="7">
-                               Light1
-                           </Col>
-                       </Row>
-                       <Row className="panel-row">
-                           <Col md="5">
-                               <h6>SWITCH ON/OFF</h6>
-                           </Col>
-                           <Col md="7">
-                               <SwitchButton
-                                   id="my-button"
-                                   labelLeft="OFF"
-                                   labelRight="ON"
-                                   isChecked={status}
-                                   action={this.changeSwitchDevice}
-                               />
-                           </Col>
-                       </Row>
-                       <Row className="panel-row">
-                           <Col md="5">
-                               <h6>BRIGHTNESS</h6>
-                           </Col>
-                           <Col md="7">
-                               <CustomSlider
-                                   id={id}
-                                   brightness={brightness}
-                                   changeBrightness={this.changeBrightnessDevice}
-                               />
-                           </Col>
-                       </Row>
-                   </Container>
+                    <Table borderless>
+                        <tbody>
+                        <tr>
+                            <th>NAME</th>
+                            <td>{name}</td>
+                        </tr>
+                        <tr>
+                            <th>PLACE</th>
+                            <td>{place}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>
+                                <hr/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><a id="switch-tooltip">TURN</a></th>
+                            <UncontrolledTooltip placement="bottom" target="switch-tooltip">
+                                Toggle to switch on/off your device
+                            </UncontrolledTooltip>
+                            <td>
+                                <SwitchButton
+                                    id="my-button"
+                                    labelLeft="OFF"
+                                    labelRight="ON"
+                                    isChecked={status}
+                                    action={this.changeSwitchDevice}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>
+                                <hr/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><a id="slider-tooltip">BRIGHTNESS</a></th>
+                            <UncontrolledTooltip placement="bottom" target="slider-tooltip">
+                                Hold on to control brightness of your device
+                            </UncontrolledTooltip>
+                            <td>
+                                <CustomSlider
+                                    id={id}
+                                    brightness={brightness}
+                                    changeBrightness={this.changeBrightnessDevice}/>
+                            </td>
+                        </tr>
+                        </tbody>
 
-
+                    </Table>
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                < ModalFooter>
+                    < Button
+                        color="primary"
+                        onClick={toggle}> Save </Button>
+                    <Button color="secondary" onClick={toggle}>Close</Button>
                 </ModalFooter>
             </Modal>
         )

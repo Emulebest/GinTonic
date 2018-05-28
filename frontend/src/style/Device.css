@@ -38,9 +38,9 @@
 }
 
 .indicator-green {
-    background-color: green !important;
+    background-color: var(--status-on) !important;
 }
 
 .indicator-red {
-    background-color: red !important;
+    background-color: var(--status-off) !important;
 }

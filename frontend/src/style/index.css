@@ -3,6 +3,8 @@
     --secondary-color-blue: #19aa8d;
     --main-font: 'Nunito', sans-serif;
     --auth-gradient: linear-gradient(to bottom, #ff9739, #ffa43c, #ffb041, #febc48, #fdc850);
+    --status-off: #fa1414;
+    --status-on: #148414;
 }
 
 body {

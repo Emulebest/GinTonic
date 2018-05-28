@@ -36,8 +36,8 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         this.props.dispatch(switchDevice(deviceId));
     }
 
-    changeBrightness(deviceId : number){
-        this.props.dispatch(changeBrightness(deviceId));
+    changeBrightness(deviceId : number, brightness : number){
+        this.props.dispatch(changeBrightness(deviceId, brightness));
     }
 
     divideDevices() {

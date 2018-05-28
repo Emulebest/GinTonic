@@ -17,7 +17,8 @@ const BRIGHTNESS_ACTIONS = {
 type BrightnessRequest = {
     type: $Values<typeof BRIGHTNESS_ACTIONS>,
     payload: {
-        deviceId: number
+        deviceId: number,
+        brightness : number
     }
 };
 
