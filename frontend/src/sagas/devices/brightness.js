@@ -18,6 +18,7 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
         // });
         let device =  {
             id: 1,
+            http : "",
             name: "Bulb 1",
             status: true,
             place: "Kitchen",

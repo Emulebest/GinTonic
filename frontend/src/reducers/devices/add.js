@@ -37,6 +37,6 @@ export default (state: InitialState, action: any): InitialState => {
 
 const addDevice = (devices, device) => {
     return {
-        devices: devices.push(device)
+        devices: [...devices, device]
     }
 };

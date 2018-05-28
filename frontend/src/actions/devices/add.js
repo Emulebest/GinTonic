@@ -6,12 +6,11 @@ import {
     ADD_DEVICE_FAILURE
 } from "../../constants/actionTypes";
 
-import type {DeviceInfoAdd} from "../../types/devices/add";
 import type {AddDeviceAction} from "../../types/devices/add";
 import type {RequestError} from "../../types/general";
 import type {Device} from "../../types/devices/devices";
 
-export const addDevice = (device: DeviceInfoAdd): AddDeviceAction => {
+export const addDevice = (device: Device): AddDeviceAction => {
     return {
         type: ADD_DEVICE_REQUEST,
         payload: {
@@ -20,7 +19,7 @@ export const addDevice = (device: DeviceInfoAdd): AddDeviceAction => {
     }
 };
 
-export const addDeviceSuccess = (device: DeviceInfoAdd & Device): AddDeviceAction => {
+export const addDeviceSuccess = (device: Device): AddDeviceAction => {
     return {
         type: ADD_DEVICE_SUCCESS,
         payload: {

@@ -5,9 +5,9 @@ import type {IOEffect} from 'redux-saga/effects';
 //import axios from "axios";
 import {addDeviceFailure, addDeviceSuccess} from "../../actions/devices/add";
 //import {BASE_URL} from "../../constants/baseUrl";
-import type {DeviceInfoAdd} from "../../types/devices/add";
+import type {Device} from "../../types/devices/devices";
 
-export default function* changeBrightness({payload}: { payload: { device: DeviceInfoAdd } }): Generator<IOEffect, void, any> {
+export default function* changeBrightness({payload}: { payload: { device: Device } }): Generator<IOEffect, void, any> {
     try {
         // const res = yield call(axios, {
         //     url: `${BASE_URL}/devices`,

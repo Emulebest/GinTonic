@@ -14,24 +14,18 @@ const ADD_DEVICE_ACTIONS = {
     ADD_DEVICE_SUCCESS
 };
 
-export type DeviceInfoAdd = {
-    name: string,
-    http: string,
-    place: string,
-    description: string
-}
 
 type AddDeviceRequest = {
     type: $Values<typeof ADD_DEVICE_ACTIONS>,
     payload: {
-        device : DeviceInfoAdd
+        device : Device
     }
 }
 
 type AddDeviceSuccess = {
     type: $Values<typeof ADD_DEVICE_ACTIONS>,
     payload: {
-        device: DeviceInfoAdd & Device
+        device: Device
     }
 }
 

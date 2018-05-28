@@ -1,6 +1,7 @@
 export let devices = [
     {
         id: 1,
+        http : "",
         name: "Bulb 1",
         status: true,
         place: "Kitchen",
@@ -9,6 +10,7 @@ export let devices = [
     },
     {
         id: 2,
+        http : "",
         name: "Bulb 2",
         status: true,
         place: "Bathroom",
@@ -17,6 +19,7 @@ export let devices = [
     },
     {
         id: 3,
+        http : "",
         name: "Bulb 3",
         status: true,
         place: "Living room",
@@ -25,6 +28,7 @@ export let devices = [
     },
     {
         id: 4,
+        http : "",
         name: "Bulb 4",
         status: false,
         place: "Bathroom",
@@ -33,6 +37,7 @@ export let devices = [
     },
     {
         id: 5,
+        http : "",
         name: "Bulb 5",
         status: false,
         place: "Kitchen",

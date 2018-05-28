@@ -18,6 +18,7 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         // });
         let device = {
             id: 1,
+            http : "",
             name: "Bulb 1",
             status: false,
             place: "Kitchen",

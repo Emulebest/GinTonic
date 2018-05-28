@@ -20,7 +20,8 @@ export type Device = {
     description : string,
     status: boolean,
     place: string,
-    brightness: number
+    brightness: number,
+    http : string
 };
 
 type AllDevicesSuccess = {

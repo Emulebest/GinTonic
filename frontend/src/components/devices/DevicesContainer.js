@@ -11,6 +11,8 @@ import {switchDevice} from "../../actions/devices/switch";
 import {changeBrightness} from "../../actions/devices/brightness";
 import type{Dispatch} from "../../types/general";
 import AddModal from "./AddModal";
+import {addDevice} from "../../actions/devices/add";
+
 
 type DeviceContainerProps = {
     devices: Array<Device>,
@@ -18,7 +20,7 @@ type DeviceContainerProps = {
     toggleSwitch : (deviceId : number) => void
 };
 type DeviceContainerState = {
-    modal : boolean
+    modalAdd : boolean
 };
 
 class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerState> {
@@ -27,13 +29,14 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         super(props);
 
         this.state = {
-            modal: false
+            modalAdd: false
         };
 
         const self: any = this;
         self.toggleSwitch = this.toggleSwitch.bind(this);
         self.changeBrightness = this.changeBrightness.bind(this);
         self.toggleAddModal = this.toggleAddModal.bind(this);
+        self.addDevice = this.addDevice.bind(this);
     }
 
     componentWillMount() {
@@ -55,8 +58,14 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
 
     toggleAddModal(){
         this.setState({
-            modal: !this.state.modal
+            modalAdd: !this.state.modalAdd
         });
+    }
+
+    addDevice(data : Device){
+        console.log("NEW DEVICE", data);
+        this.props.dispatch(addDevice(data));
+        this.toggleAddModal();
     }
 
     renderNested = (row: Array<Device>):Array<Node> => {
@@ -94,11 +103,12 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
                                 className="btn-add-device"
                                 color="success">+</Button>
                             <AddModal
-                                isOpen={this.state.modal}
+                                addDevice={this.addDevice}
+                                isOpen={this.state.modalAdd}
                                 toggle={this.toggleAddModal}
                             />
                             <UncontrolledTooltip placement="left" target="add-tooltip">
-                                Press to add new device to your collection
+                                Add new device to your collection
                             </UncontrolledTooltip>
                         </Col>
 
