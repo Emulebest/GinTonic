@@ -24,18 +24,22 @@ fn main() {
     server::new(
         || vec![
             App::new()
-                .prefix("/transaction")
-                .resource("/", |r| r.method(http::Method::GET).with(transactions)),
+                .prefix("/send")
+                .resource("/", |r| r.method(http::Method::POST).with(transaction_send)),
             App::new()
                 .prefix("/wallet_create")
                 .resource("/", |r| r.method(http::Method::GET).f(create_wallet)),
+            App::new()
+                .prefix("/mine")
+                .resource("/", |r| r.method(http::Method::POST).with(mine)),
+            App::new()
+                .prefix("/balance")
+                .resource("/", |r| r.method(http::Method::POST).with(get_amount)),
         ])
         .bind("0.0.0.0:8081").unwrap().run();
-
 }
 
 fn db_init() -> Result<()> {
-    println!("Hello");
     let conn = Connection::connect("postgres://postgres:123@db:5432",
                                    TlsMode::None)?;
     println!("{:?}", conn);
@@ -43,6 +47,9 @@ fn db_init() -> Result<()> {
                     pub_key TEXT,
                     private_key TEXT,
                     amount  BIGINT
+                  )", &[])?;
+    conn.execute("CREATE TABLE IF NOT EXISTS transaction (
+                    data TEXT
                   )", &[])?;
     println!("Done");
     Ok(())

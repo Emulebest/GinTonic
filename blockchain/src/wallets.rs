@@ -1,6 +1,7 @@
 extern crate sha2;
 extern crate postgres;
 extern crate serde_json;
+extern crate rand;
 
 use self::sha2::Sha512;
 use postgres::{Connection, TlsMode};
@@ -9,6 +10,7 @@ use actix_web::HttpResponse;
 use actix_web::Error;
 use actix_web::HttpRequest;
 use actix_web::Result;
+use self::rand::{thread_rng, Rng};
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Wallet {
@@ -21,8 +23,8 @@ impl Wallet {
     pub fn new() -> Self {
         let conn = Connection::connect("postgres://postgres:123@db:5432",
                                        TlsMode::None).unwrap();
-        let pub_key = "abcd".to_owned();
-        let private_key = "defg".to_owned();
+        let pub_key = rand_string();
+        let private_key = rand_string();
         let wal = Wallet {
             amount: 0,
             pub_key,
@@ -46,4 +48,9 @@ impl Responder for Wallet {
             .content_type("application/json")
             .body(body))
     }
+}
+
+fn rand_string() -> String {
+    let rand_string: String = thread_rng().gen_ascii_chars().take(10).collect();
+    rand_string
 }
