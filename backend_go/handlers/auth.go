@@ -1,8 +1,8 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
 import (
 	"../models"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ func RegisterUser(context *gin.Context) {
 	// If binding fails, aborting the request with HTTP 400
 	context.BindJSON(&boundUser)
 
-	newUser, err := models.RegisterUser(boundUser.Username, boundUser.Password)
+	newUser, err := models.RegisterUser(boundUser.Username, boundUser.Password, boundUser.Email)
 
 	if err != nil {
 		context.AbortWithStatusJSON(
@@ -35,7 +35,7 @@ func LoginUser(context *gin.Context) {
 	var boundUser models.User
 	context.BindJSON(&boundUser)
 
-	loggedUser, err := models.LoginUser(boundUser.Username, boundUser.Password)
+	loggedUser, err := models.LoginUser(boundUser.Username, boundUser.Email, boundUser.Password)
 
 	if err != nil {
 		context.AbortWithStatusJSON(

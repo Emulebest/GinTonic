@@ -25,13 +25,8 @@ func initializeRoutes() *gin.Engine {
 
 func main() {
 
-	err := models.InitializeDB()
+	models.InitializeDB()
 	defer models.CloseDB()
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
 
 	fmt.Println("[VADYM] Successfully connected to the Postgres DB.")
 
