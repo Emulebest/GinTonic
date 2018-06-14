@@ -14,7 +14,7 @@ golang_1   | [GIN-debug] Listening and serving HTTP on :8080
 
 Теперь запросы.
 ________________________________________________________________________________________________________________________
-    /user/auth/login
+    POST /user/auth/login
     Обязательные поля: "username"+"password" ИЛИ "email"+"password"
 
 Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"vadym", "password":"qwerty"}' http://localhost:8080/user/auth/login
@@ -25,12 +25,18 @@ ________________________________________________________________________________
 
 Вместо поля "username" можно таким же образом передать поле "email", тогда произойдет попытка входа через email.
 ________________________________________________________________________________________________________________________
-    /user/auth/register
+    POST /user/auth/register
     Обязательные поля: "username"+"email"+"password"
 
 Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"dodik", "password":"qwerty1", "email":"dodik@spb.ru"}' http://localhost:8080/user/auth/register
 
 Ответ (OK): {"user":{"id":2,"username":"dodik","password":"qwerty1","token":"13fe5db18823c1da","firstName":"","secondName":"","email":"dodik@spb.ru"}}
 ________________________________________________________________________________________________________________________
+    GET /user/
+    Обязательные поля: "id"
+    Headers: "Auth: <token>"
 
-В следующем выпуске: запросы GET и PUT для роута /user с отправлением токена!
+Запрос: curl -i -X GET http://localhost:8080/user/ -H "Accept: application/json" -H "Content-Type: application/json" -H "Auth: 641c9b200592856c" -d '{"id":1}'
+
+Ответ (OK): {"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"","secondName":"","email":"vadym@mailru"}
+________________________________________________________________________________________________________________________

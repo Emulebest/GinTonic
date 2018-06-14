@@ -109,3 +109,14 @@ func LoginUser(username, email, password string) (*User, error) {
 
 	return &user, nil
 }
+
+func FindUser(userId uint) *User {
+	var user User
+	db.First(&user, userId)
+
+	if user.Token == "" {
+		return nil
+	}
+
+	return &user
+}
