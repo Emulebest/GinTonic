@@ -14,9 +14,11 @@ services:
     working_dir: /go/src/app
     volumes:
       - ./backend_go:/go/src/app
-    command: go run index.go
+    command: go get github.com/gin-gonic/gin && go get github.com/jinzhu/gorm && go get github.com/jinzhu/gorm/dialects/postgres && go run index.go
     links:
       - db
+    ports:
+      - "8080:8080"
 
 
   py_test:
@@ -41,6 +43,16 @@ services:
       - "3000:3000"
     links:
       - golang
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
 
   mongo:
     image: mongo
