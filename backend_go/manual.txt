@@ -1,0 +1,36 @@
+Запускаем Docker:
+
+sudo docker-compose -f docker-compose-unix.yml up
+
+При первом запуске rust будет долго устанавливать библиотеки, потом не будет.
+Если в консоли будет ОЧЕНЬ много повторного вывода от баз данных, запускаем один раз так:
+
+sudo docker-compose -f docker-compose-unix.yml up --remove-orphans
+
+При успешном запуске бэкэнда должны быть такие сообщения:
+
+golang_1   | [VADYM] Successfully connected to the Postgres DB.
+golang_1   | [GIN-debug] Listening and serving HTTP on :8080
+
+Теперь запросы.
+________________________________________________________________________________________________________________________
+    /user/auth/login
+    Обязательные поля: "username"+"password" ИЛИ "email"+"password"
+
+Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"vadym", "password":"qwerty"}' http://localhost:8080/user/auth/login
+
+Ответ (OK): {"user":{"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"","secondName":"","email":"vadym@mailru"}}
+
+Ответ (ERR):{"error":"the password is incorrect"}
+
+Вместо поля "username" можно таким же образом передать поле "email", тогда произойдет попытка входа через email.
+________________________________________________________________________________________________________________________
+    /user/auth/register
+    Обязательные поля: "username"+"email"+"password"
+
+Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"dodik", "password":"qwerty1", "email":"dodik@spb.ru"}' http://localhost:8080/user/auth/register
+
+Ответ (OK): {"user":{"id":2,"username":"dodik","password":"qwerty1","token":"13fe5db18823c1da","firstName":"","secondName":"","email":"dodik@spb.ru"}}
+________________________________________________________________________________________________________________________
+
+В следующем выпуске: запросы GET и PUT для роута /user с отправлением токена!
