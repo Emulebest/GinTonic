@@ -1,0 +1,7 @@
+---Register new user and receive a token
+
+curl -i -X POST http://localhost:8080/u/register -H "Accept: application/json" -H "Content-Type: application/json" -d '{"username":"hesoyam", "password":"12345"}'
+
+---Login and receive a token
+
+curl -i -X POST http://localhost:8080/u/login -H "Accept: application/json" -H "Content-Type: application/json" -d '{"username":"hesoyam", "password":"12345"}'
