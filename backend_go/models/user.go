@@ -120,3 +120,26 @@ func FindUser(userId uint) *User {
 
 	return &user
 }
+
+func EditUser(user *User) error {
+	if user == nil {
+		return errors.New("the user cannot be null")
+	}
+
+	userId := user.ID
+
+	var dbUser User
+	db.First(&dbUser, userId)
+
+	if dbUser.Token == "" || dbUser.ID != user.ID {
+		return errors.New("the user doesn't exist in the database")
+	}
+
+	dbUser.FirstName = user.FirstName
+	dbUser.SecondName = user.SecondName
+
+	db.Save(&dbUser)
+	user = &dbUser
+
+	return nil
+}

@@ -40,3 +40,13 @@ ________________________________________________________________________________
 
 Ответ (OK): {"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"","secondName":"","email":"vadym@mailru"}
 ________________________________________________________________________________________________________________________
+    PUT /user/
+    Обязательные поля: "id"
+    Headers: "Auth: <token>"
+    Опциональные поля: "firstName", "secondName"
+
+Запрос: curl -i -X PUT http://localhost:8080/user/ -H "Accept: application/json" -H "Content-Type: application/json" -H "Auth: 641c9b200592856c" -d '{"id":1, "firstName":"vadym", "secondName":"bobrov"}'
+
+Ответ (OK): {"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"vadym","secondName":"bobrov","email":"vadym@mailru"}
+
+Можно менять только "firstName" и "secondName" в текущей версии. Если указать в запросе еще какие-нибудь поля, то обрабатываться они не будут. Только те, что в примере.

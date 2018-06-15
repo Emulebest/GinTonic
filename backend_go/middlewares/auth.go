@@ -31,9 +31,9 @@ func IsAuth() gin.HandlerFunc {
 					},
 				)
 			}
-			c.Set("user", dbUser)
 		}
 
+		c.Set("user", jsonUser)
 		c.Next()
 	}
 }

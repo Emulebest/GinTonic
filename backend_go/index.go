@@ -15,6 +15,8 @@ func initializeRoutes() *gin.Engine {
 	userRoutes := router.Group("/user")
 	{
 		userRoutes.GET("/", middlewares.IsAuth(), handlers.GetUserInfo)
+		userRoutes.PUT("/", middlewares.IsAuth(), handlers.EditUserInfo)
+
 		authRoutes := userRoutes.Group("/auth")
 		{
 			authRoutes.POST("/register", handlers.RegisterUser)
