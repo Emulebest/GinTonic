@@ -11,6 +11,8 @@ import Lending from "./Lending";
 import {Switch, Route} from 'react-router-dom';
 import {NotificationContainer} from 'react-notifications';
 
+
+
 const Body = (): Node => (
     <React.Fragment>
         <Switch>
@@ -27,7 +29,7 @@ const App = (): Node => (
     <React.Fragment>
         <NotificationContainer/>
         <Header/>
-        <Body/>
+        <Body />
     </React.Fragment>
 );
 

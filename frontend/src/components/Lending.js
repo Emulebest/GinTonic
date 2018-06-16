@@ -3,6 +3,8 @@
 import React from 'react';
 import type {Node} from 'react';
 import {Slide, Fade, LightSpeed} from 'react-reveal';
+import {Link} from "react-router-dom";
+import {NotificationManager} from "react-notifications";
 import {
     Container,
     Jumbotron,
@@ -25,6 +27,12 @@ import "../style/Lending.css";
 import {Element} from 'react-scroll';
 
 const Lending = (): Node => {
+
+    const notify = () => {
+        console.log('here');
+
+    };
+
     return (
         <React.Fragment>
 
@@ -53,7 +61,7 @@ const Lending = (): Node => {
                                             and smarter for you.
                                         </p>
                                     </div>
-                                    <Button size="lg" color="success">GET STARTED NOW</Button>
+                                    <Button size="lg" color="success" tag={Link} to='/login'>GET STARTED NOW</Button>
                                 </div>
                             </Slide>
                         </Col>
@@ -220,24 +228,24 @@ const Lending = (): Node => {
                                         <FormGroup row>
                                             <Label for="exampleEmail" sm={2}>Email</Label>
                                             <Col>
-                                                <Input type="email" name="email" id="exampleEmail"/>
+                                                <Input type="email" name="email" placeholder="Email" id="exampleEmail"/>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
                                             <Label for="name" sm={2}>Name</Label>
                                             <Col>
-                                                <Input type="text" name="name" id="name"/>
+                                                <Input type="text" name="name" placeholder="Name" id="name"/>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
                                             <Label for="comments" sm={2}>Comments</Label>
                                             <Col>
-                                                <Input type="textarea" name="comments" id="comments"/>
+                                                <Input placeholder="Comments" type="textarea" name="comments" id="comments"/>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
                                             <Col md={{size: 1, offset: 2}}>
-                                                <Button>Send</Button>
+                                                <Button size="lg" color="success" onClick={() => NotificationManager.info('Thank you! We will contact you in 24 hours')}>Send</Button>
                                             </Col>
                                         </FormGroup>
                                     </Form>

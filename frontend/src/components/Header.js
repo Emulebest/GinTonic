@@ -86,7 +86,7 @@ class Header extends React.Component <HeaderProps, HeaderState> {
 
         return (
             <React.Fragment>
-                <Navbar color="dark" dark expand="md">
+                <Navbar fixed={(this.props.location.pathname === "/") ? "top" : ""} color="dark" dark expand="md">
                     <NavbarBrand tag={Link} to='/'>Home</NavbarBrand>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
