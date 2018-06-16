@@ -16,16 +16,15 @@ pub struct WalletInfo {
     pub address: String
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct SendT {
-    from: String,
-    to: String,
-    private_key: String,
-    amount: i32
+    pub from: String,
+    pub to: String,
+    pub amount: String,
+    pub private: String,
 }
 
 pub fn transaction_send(trans: Json<SendT>) -> Json<String> {
-    println!("Hello");
     let mut trans_typer = trans.clone();
     let transaction = trans_typer.clone();
     let serialized = serde_json::to_string(&transaction).unwrap();
@@ -33,6 +32,8 @@ pub fn transaction_send(trans: Json<SendT>) -> Json<String> {
     let conn = Connection::connect("postgres://postgres:123@db:5432",
                                    TlsMode::None).unwrap();
     conn.execute("INSERT INTO transaction (data) VALUES ($1)",
+                 &[&serialized]).unwrap();
+    conn.execute("INSERT INTO transaction_history (data) VALUES ($1)",
                  &[&serialized]).unwrap();
     Json(serialized)
 }
@@ -50,21 +51,25 @@ pub fn mine(pub_key: Json<WalletInfo>) -> Result<Json<String>> {
                 println!("{:?}", t);
                 match t {
                     TransactionType::SendTransaction => {
+                        println!("Here send");
                         send_coins(trans);
                     },
                     TransactionType::RewardTransaction => {
+                        println!("Here reward");
                         get_reward(trans);
                     },
                     TransactionType::DeviceTransaction => {
+                        println!("Here device");
                         device(trans);
                     },
                     TransactionType::UnknownTransaction => {
+                        println!("Here unknown");
                         unknown(trans);
                     }
                 };
             },
             Err(_) => {
-
+                println!("Error");
             }
         }
     }
@@ -87,5 +92,18 @@ pub fn get_amount(pub_key: Json<WalletInfo>) -> Json<HashMap<&'static str, i64>>
 pub fn create_wallet(req: HttpRequest) -> Wallet {
     let new_wallet = Wallet::new();
     new_wallet
+}
+
+pub fn transaction_history(req: HttpRequest) -> Json<HashMap<String, Vec<String>>> {
+    let mut transactions = HashMap::new();
+    let conn = Connection::connect("postgres://postgres:123@db:5432",
+                                   TlsMode::None).unwrap();
+    let mut transaction_list: Vec<String> = Vec::new();
+    for row in &conn.query("SELECT data FROM transaction_history", &[]).unwrap() {
+        let data: String = row.get(0);
+        transaction_list.push(data);
+    }
+    transactions.insert("transactions".to_owned(), transaction_list);
+    Json(transactions)
 }
 

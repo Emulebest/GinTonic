@@ -15,7 +15,7 @@ pub enum TransactionType {
 
 impl TransactionType {
     pub fn get_type(t: &mut Transaction) -> Result<Self, TransactionError> {
-        if !t.0.contains_key("private_key") {
+        if !t.0.contains_key("private") {
             Err(TransactionError::new("No private key provided!"))
         } else {
             if t.0.contains_key(&"from".to_string()) && t.0.contains_key(&"to".to_string()) && t.0.contains_key(&"amount".to_string()) {

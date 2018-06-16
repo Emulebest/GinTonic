@@ -35,6 +35,9 @@ fn main() {
             App::new()
                 .prefix("/balance")
                 .resource("/", |r| r.method(http::Method::POST).with(get_amount)),
+            App::new()
+                .prefix("/history")
+                .resource("/", |r| r.method(http::Method::GET).with(transaction_history)),
         ])
         .bind("0.0.0.0:8081").unwrap().run();
 }
@@ -49,6 +52,9 @@ fn db_init() -> Result<()> {
                     amount  BIGINT
                   )", &[])?;
     conn.execute("CREATE TABLE IF NOT EXISTS transaction (
+                    data TEXT
+                  )", &[])?;
+    conn.execute("CREATE TABLE IF NOT EXISTS transaction_history (
                     data TEXT
                   )", &[])?;
     println!("Done");

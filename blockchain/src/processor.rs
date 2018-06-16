@@ -5,6 +5,7 @@ pub fn send_coins(trans: Transaction) {
     let from = trans.0.get("from").unwrap();
     let to = trans.0.get("to").unwrap();
     let amount = trans.0.get("amount").unwrap();
+    let amount = &amount.parse::<i64>().unwrap();
     let conn = Connection::connect("postgres://postgres:123@db:5432",
                                    TlsMode::None).unwrap();
     conn.execute("UPDATE wallet SET amount = amount - $2 WHERE pub_key = $1",
