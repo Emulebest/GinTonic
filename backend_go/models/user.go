@@ -109,3 +109,37 @@ func LoginUser(username, email, password string) (*User, error) {
 
 	return &user, nil
 }
+
+func FindUser(userId uint) *User {
+	var user User
+	db.First(&user, userId)
+
+	if user.Token == "" {
+		return nil
+	}
+
+	return &user
+}
+
+func EditUser(user *User) error {
+	if user == nil {
+		return errors.New("the user cannot be null")
+	}
+
+	userId := user.ID
+
+	var dbUser User
+	db.First(&dbUser, userId)
+
+	if dbUser.Token == "" || dbUser.ID != user.ID {
+		return errors.New("the user doesn't exist in the database")
+	}
+
+	dbUser.FirstName = user.FirstName
+	dbUser.SecondName = user.SecondName
+
+	db.Save(&dbUser)
+	user = &dbUser
+
+	return nil
+}
