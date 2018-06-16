@@ -42,7 +42,6 @@ class CustomSlider extends Component<SliderProps, SliderState> {
             <div className="slider-container">
                 <Slider
                     dots
-                    min={0}
                     marks={marks}
                     step={25}
                     onChange={this.handleSliderChange}

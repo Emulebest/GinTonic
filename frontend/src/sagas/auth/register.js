@@ -11,15 +11,23 @@ import type {User} from "../../types/auth";
 
 export default function* register({payload}: { payload: RegisterCredentials }): Generator<IOEffect, void, any> {
     try {
+        let {password, confirmPassword, userName, email} = payload;
+
+        let bodyReq = JSON.stringify({
+            email, password,
+            username: userName
+        });
+
         const res = yield call(axios, {
-            url: `${BASE_URL}/user/register`,
+            url: `${BASE_URL}/user/auth/register`,
             method: "POST",
-            data: payload,
+            data: bodyReq,
             headers: {
-                'content-type': 'application/json',
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             }
         });
-        let {user}: {user : User} = res.data;
+        let {user}: { user: User } = res.data;
         yield put(registerSuccess(user));
     }
     catch (error) {
