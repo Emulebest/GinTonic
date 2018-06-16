@@ -6,6 +6,7 @@ import (
 	"./middlewares"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 func initializeRoutes() *gin.Engine {
@@ -35,5 +36,12 @@ func main() {
 	fmt.Println("[VADYM] Successfully connected to the Postgres DB.")
 
 	router := initializeRoutes()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Auth"},
+		AllowCredentials: true,
+	}))
+
 	router.Run()
 }
