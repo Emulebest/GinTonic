@@ -1,0 +1,18 @@
+curl localhost:8081/wallet_create
+{"pub_key":"Y3pcvvC70N","private_key":"pvoUGs84m4","amount":0}
+
+
+curl -d '{"from": "N8QowfrX6p", "amount": "20", "to": "C9DpZPLMbW", "private": "ab"}' -H "Content-Type: application/json" -X POST http://localhost:8081/send
+"{\"from\":\"N8QowfrX6p\",\"to\":\"C9DpZPLMbW\",\"amount\":\"20\",\"private\":\"ab\"}"
+
+
+curl -d '{"address": "N8QowfrX6p"}' -H "Content-Type: application/json" -X POST http://localhost:8081/mine
+"All transactions Okay"
+
+curl -d '{"address": "N8QowfrX6p"}' -H "Content-Type: application/json" -X POST http://localhost:8081/balance
+{"amount":580}
+
+
+curl localhost:8081/history/
+
+{"transactions":["{\"from\":\"N8QowfrX6p\",\"to\":\"C9DpZPLMbW\",\"amount\":\"20\",\"private\":\"ab\"}","{\"from\":\"N8QowfrX6p\",\"to\":\"C9DpZPLMbW\",\"amount\":\"20\",\"private\":\"ab\"}","{\"from\":\"N8QowfrX6p\",\"to\":\"C9DpZPLMbW\",\"amount\":\"20\",\"private\":\"ab\"}","{\"from\":\"N8QowfrX6p\",\"to\":\"C9DpZPLMbW\",\"amount\":\"20\",\"private\":\"ab\"}"]}

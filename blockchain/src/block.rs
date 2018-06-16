@@ -64,7 +64,7 @@ pub struct Data {
     pub transaction_list: Vec<Transaction>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Transaction(pub HashMap<String, String>);
 
 
