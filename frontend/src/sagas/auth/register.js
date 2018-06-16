@@ -8,10 +8,12 @@ import {BASE_URL} from "../../constants/baseUrl";
 
 import type {RegisterCredentials} from "../../types/auth/register";
 import type {User} from "../../types/auth";
+import {NotificationManager} from "react-notifications";
+import {REGISTER_SUCCESS} from "../../constants/errors";
 
 export default function* register({payload}: { payload: RegisterCredentials }): Generator<IOEffect, void, any> {
     try {
-        let {password, confirmPassword, userName, email} = payload;
+        let {password, userName, email, history} = payload;
 
         let bodyReq = JSON.stringify({
             email, password,
@@ -27,8 +29,15 @@ export default function* register({payload}: { payload: RegisterCredentials }): 
                 "Content-Type": "application/json"
             }
         });
+
         let {user}: { user: User } = res.data;
+
+        NotificationManager.success(REGISTER_SUCCESS.description, REGISTER_SUCCESS.title, 5000);
+
         yield put(registerSuccess(user));
+
+        localStorage.setItem('token', user.token);
+        yield history.push("/account");
     }
     catch (error) {
         yield put(registerFailure(error));

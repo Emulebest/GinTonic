@@ -9,6 +9,7 @@ import Register from "../containers/Register";
 import DeviceContainer from "../containers/DeviceContainer";
 import Lending from "./Lending";
 import {Switch, Route} from 'react-router-dom';
+import {NotificationContainer} from 'react-notifications';
 
 const Body = (): Node => (
     <React.Fragment>
@@ -24,6 +25,7 @@ const Body = (): Node => (
 
 const App = (): Node => (
     <React.Fragment>
+        <NotificationContainer/>
         <Header/>
         <Body/>
     </React.Fragment>

@@ -7,6 +7,9 @@ import RegisterFrom from "./RegisterForm";
 import {register} from "../../actions/auth/register";
 import type {Dispatch} from "../../types/general";
 import type {RegisterCredentials} from "../../types/auth/register";
+import {REGISTER_ERROR} from "../../constants/errors";
+
+import {NotificationManager} from 'react-notifications';
 
 type RegisterProps = {
     dispatch: Dispatch,
@@ -15,20 +18,27 @@ type RegisterProps = {
 
 class Register extends Component<RegisterProps> {
 
+    componentDidUpdate() {
+        this.showError();
+    }
+
     showError = (): ?Node => {
-        let {message} = this.props;
-        return (message) ? (
-            <React.Fragment>
-                <p>{message}</p>
-            </React.Fragment>
-        ) : null;
+        let {status, message} = this.props;
+        (status >= 300) ?
+            NotificationManager.error(message, REGISTER_ERROR.title, 5000) :
+            null;
     };
 
     handleRegister = ({email, password, confirmPassword, userName}: RegisterCredentials) => {
-        this.props.dispatch(register(email, password, confirmPassword, userName));
+        if (password !== confirmPassword) {
+            NotificationManager.error('Passwords are not the same', REGISTER_ERROR.title, 5000);
+            return;
+        }
+        this.props.dispatch(register(email, password, confirmPassword, userName, this.props.history));
     };
 
     render = (): Node => {
+
         return (
             <div className="form-container">
                 <div className="auth-form">

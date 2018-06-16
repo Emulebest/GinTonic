@@ -8,6 +8,8 @@ import {login} from "../../actions/auth/login";
 
 import type {LoginCredentials} from "../../types/auth/login";
 import type {Dispatch} from "../../types/general";
+import {NotificationManager} from "react-notifications";
+import {LOGIN_ERROR} from "../../constants/errors";
 
 type LoginProps = {
     message: ?string,
@@ -18,12 +20,15 @@ type LoginProps = {
 
 class Login extends Component<LoginProps> {
 
+    componentDidUpdate() {
+        this.showError();
+    }
+
     showError = (): ?Node => {
-        return (this.props.message) ? (
-            <React.Fragment>
-                <p>{this.props.message}</p>
-            </React.Fragment>
-        ) : null;
+        let {status, message} = this.props;
+        (status >= 300) ?
+            NotificationManager.error(message, LOGIN_ERROR.title, 5000) :
+            null;
     };
 
     handleLogin = ({email, password}: LoginCredentials) => {
@@ -33,7 +38,7 @@ class Login extends Component<LoginProps> {
     render = (): Node => {
         const {token}: { token: ?string } = this.props;
         if (token) {
-            return <Redirect to="/"/>;
+            return <Redirect to="/account"/>;
         }
         return (
             <div className="form-container">
