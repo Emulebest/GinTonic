@@ -1,0 +1,52 @@
+Запускаем Docker:
+
+sudo docker-compose -f docker-compose-unix.yml up
+
+При первом запуске rust будет долго устанавливать библиотеки, потом не будет.
+Если в консоли будет ОЧЕНЬ много повторного вывода от баз данных, запускаем один раз так:
+
+sudo docker-compose -f docker-compose-unix.yml up --remove-orphans
+
+При успешном запуске бэкэнда должны быть такие сообщения:
+
+golang_1   | [VADYM] Successfully connected to the Postgres DB.
+golang_1   | [GIN-debug] Listening and serving HTTP on :8080
+
+Теперь запросы.
+________________________________________________________________________________________________________________________
+    POST /user/auth/login
+    Обязательные поля: "username"+"password" ИЛИ "email"+"password"
+
+Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"vadym", "password":"qwerty"}' http://localhost:8080/user/auth/login
+
+Ответ (OK): {"user":{"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"","secondName":"","email":"vadym@mailru"}}
+
+Ответ (ERR):{"error":"the password is incorrect"}
+
+Вместо поля "username" можно таким же образом передать поле "email", тогда произойдет попытка входа через email.
+________________________________________________________________________________________________________________________
+    POST /user/auth/register
+    Обязательные поля: "username"+"email"+"password"
+
+Запрос: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"dodik", "password":"qwerty1", "email":"dodik@spb.ru"}' http://localhost:8080/user/auth/register
+
+Ответ (OK): {"user":{"id":2,"username":"dodik","password":"qwerty1","token":"13fe5db18823c1da","firstName":"","secondName":"","email":"dodik@spb.ru"}}
+________________________________________________________________________________________________________________________
+    GET /user/
+    Обязательные поля: "id"
+    Headers: "Auth: <token>"
+
+Запрос: curl -i -X GET http://localhost:8080/user/ -H "Accept: application/json" -H "Content-Type: application/json" -H "Auth: 641c9b200592856c" -d '{"id":1}'
+
+Ответ (OK): {"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"","secondName":"","email":"vadym@mailru"}
+________________________________________________________________________________________________________________________
+    PUT /user/
+    Обязательные поля: "id"
+    Headers: "Auth: <token>"
+    Опциональные поля: "firstName", "secondName"
+
+Запрос: curl -i -X PUT http://localhost:8080/user/ -H "Accept: application/json" -H "Content-Type: application/json" -H "Auth: 641c9b200592856c" -d '{"id":1, "firstName":"vadym", "secondName":"bobrov"}'
+
+Ответ (OK): {"id":1,"username":"vadym","password":"qwerty","token":"641c9b200592856c","firstName":"vadym","secondName":"bobrov","email":"vadym@mailru"}
+
+Можно менять только "firstName" и "secondName" в текущей версии. Если указать в запросе еще какие-нибудь поля, то обрабатываться они не будут. Только те, что в примере.
