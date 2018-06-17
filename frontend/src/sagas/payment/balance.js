@@ -11,17 +11,19 @@ export default function* createWallet({payload}) {
             address: payload.pubKey
         });
 
-        const res = yield call(axios, {
-            url: `${BLOCKCHAIN_URL}/balance`,
-            method: "POST",
-            data,
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        });
+        // const res = yield call(axios, {
+        //     url: `${BLOCKCHAIN_URL}/balance`,
+        //     method: "POST",
+        //     data,
+        //     headers: {
+        //         "Accept": "application/json",
+        //         "Content-Type": "application/json"
+        //     }
+        // });
+        //
+        // let {amount} = res.data;
 
-        let {amount} = res.data;
+        let {amount} = {amount:580}
 
         yield put(getWalletSuccess(amount));
 

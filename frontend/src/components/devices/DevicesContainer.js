@@ -108,7 +108,7 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
                             <h1>My connected devices</h1>
                         </Col>
                         <Col id="balance-tooltip" md="3">
-                            <h3  style={balanceStyle}>Balance: {amount} $</h3>
+                            <h3  style={balanceStyle}>Balance: {amount || 0} $</h3>
                         </Col>
                         <Col md="1">
                             <Button

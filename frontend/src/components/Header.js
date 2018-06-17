@@ -82,8 +82,7 @@ class Header extends React.Component <HeaderProps, HeaderState> {
     }
 
     render(): Node {
-        let token: ?string = this.props.token || localStorage.getItem('token');
-
+        let token: ?string = localStorage.getItem('token');
         return (
             <React.Fragment>
                 <Navbar fixed={(this.props.location.pathname === "/") ? "top" : ""} color="dark" dark expand="md">

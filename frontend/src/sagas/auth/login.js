@@ -23,14 +23,16 @@ export default function* login({payload}: { payload: { email: string, password: 
             }
         });
 
-        let {user}: LoginResponseSuccess = res.data;
-        yield put(loginSuccess(user.token, user));
 
-        yield put(getWalletRequest("N8QowfrX6p"));
+        let {user}: LoginResponseSuccess = res.data;
 
         localStorage.setItem('token', user.token);
 
         NotificationManager.success(LOGIN_SUCCESS.description, LOGIN_SUCCESS.title, 5000);
+
+        yield put(loginSuccess(user.token, user));
+
+        yield put(getWalletRequest("Y3pcvvC70N"));
 
     }
     catch (error) {
