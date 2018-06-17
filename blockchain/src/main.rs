@@ -25,45 +25,53 @@ fn main() {
     server::new(
         || vec![
             App::new()
-                .configure(|app| {
-                    Cors::for_app(app)
-                        .allowed_origin("localhost:3000")
-                        .register()
-                })
                 .prefix("/send")
-                .resource("/", |r| r.method(http::Method::POST).with(transaction_send)),
-            App::new()
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("localhost:3000")
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::POST).with(transaction_send))
                         .register()
-                })
+                }),
+            App::new()
                 .prefix("/wallet_create")
-                .resource("/", |r| r.method(http::Method::GET).f(create_wallet)),
-            App::new()
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("localhost:3000")
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::GET).f(create_wallet))
                         .register()
-                })
+                }),
+            App::new()
                 .prefix("/mine")
-                .resource("/", |r| r.method(http::Method::POST).with(mine)),
-            App::new()
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("localhost:3000")
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::POST).with(mine))
                         .register()
-                })
+                }),
+            App::new()
                 .prefix("/balance")
-                .resource("/", |r| r.method(http::Method::POST).with(get_amount)),
-            App::new()
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("localhost:3000")
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::POST).with(get_amount))
                         .register()
-                })
+                }),
+            App::new()
                 .prefix("/history")
-                .resource("/", |r| r.method(http::Method::GET).with(transaction_history)),
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::GET).with(transaction_history))
+                        .register()
+                }),
+            App::new()
+                .prefix("/device")
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("*")
+                        .resource("/", |r| r.method(http::Method::GET).with(device_transaction))
+                        .register()
+                }),
         ])
         .bind("0.0.0.0:8081").unwrap().run();
 }
