@@ -27,7 +27,7 @@ services:
     working_dir: /go/src/app
     volumes:
       - ./iot_server:/go/src/app
-    command: /bin/sh -c "go get && go run index.go"
+    command: /bin/sh -c "go get -d -u gobot.io/x/gobot && go get -d -u gobot.io/x/gobot/drivers/gpio && go get -d -u gobot.io/x/gobot/platforms/firmata && go get -d -u gobot.io/x/gobot/api && go run index.go"
     ports:
       - "3001:3000"
 
