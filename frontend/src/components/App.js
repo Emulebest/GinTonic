@@ -10,7 +10,7 @@ import DeviceContainer from "../containers/DeviceContainer";
 import Lending from "./Lending";
 import {Switch, Route} from 'react-router-dom';
 import {NotificationContainer} from 'react-notifications';
-
+import HistoryContainer from "../containers/HistoryContainer";
 
 
 const Body = (): Node => (
@@ -21,6 +21,7 @@ const Body = (): Node => (
             <Route path="/register" component={Register}/>
             <Route path="/logout" component={Logout}/>
             <Route path="/account" component={DeviceContainer}/>
+            <Route path="/history" component={HistoryContainer}/>
         </Switch>
     </React.Fragment>
 );

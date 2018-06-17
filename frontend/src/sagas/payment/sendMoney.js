@@ -26,7 +26,7 @@ export default function* sendMoney({payload}) {
         //     }
         // });
 
-        NotificationManager.info(`Minus ${amount}$ from your balance`, "Balance", 5000);
+        NotificationManager.info(`Minus ${amount} from your balance`, "Balance", 5000);
 
         let money = amount;
 
