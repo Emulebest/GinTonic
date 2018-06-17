@@ -45,8 +45,8 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
 
     changeBrightnessDevice(brightness: number) {
         let {changeBrightness} = this.props;
-        let {id} = this.props;
-        changeBrightness(id, brightness);
+        let {id, status} = this.props;
+        changeBrightness(id, brightness, status);
     }
 
     deleteDevice() {
