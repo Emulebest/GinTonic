@@ -17,6 +17,7 @@ use std::thread;
 use actix_web::{server, App, http};
 use handlers::*;
 use postgres::{Connection, TlsMode, Result};
+use actix_web::middleware::cors::Cors;
 
 fn main() {
     db_init();
@@ -24,18 +25,43 @@ fn main() {
     server::new(
         || vec![
             App::new()
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("localhost:3000")
+                        .register()
+                })
                 .prefix("/send")
                 .resource("/", |r| r.method(http::Method::POST).with(transaction_send)),
             App::new()
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("localhost:3000")
+                        .register()
+                })
                 .prefix("/wallet_create")
                 .resource("/", |r| r.method(http::Method::GET).f(create_wallet)),
             App::new()
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("localhost:3000")
+                        .register()
+                })
                 .prefix("/mine")
                 .resource("/", |r| r.method(http::Method::POST).with(mine)),
             App::new()
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("localhost:3000")
+                        .register()
+                })
                 .prefix("/balance")
                 .resource("/", |r| r.method(http::Method::POST).with(get_amount)),
             App::new()
+                .configure(|app| {
+                    Cors::for_app(app)
+                        .allowed_origin("localhost:3000")
+                        .register()
+                })
                 .prefix("/history")
                 .resource("/", |r| r.method(http::Method::GET).with(transaction_history)),
         ])
