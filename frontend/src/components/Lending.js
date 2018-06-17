@@ -121,11 +121,7 @@ const Lending = (): Node => {
 
                                             <CardBody>
                                                 <CardTitle>Manage your home devices</CardTitle>
-                                                <CardText>No matter which compatible accessories you choose, the
-                                                    Home
-                                                    app
-                                                    makes it easy to set up and control all of them, all from one
-                                                    place.</CardText>
+                                                <CardText>Get a convenient way to turn on your bulb, microwave, washing machine or kettle with just one click in our service</CardText>
                                             </CardBody>
                                         </Card>
                                     </Slide>
@@ -141,11 +137,7 @@ const Lending = (): Node => {
 
                                             <CardBody>
                                                 <CardTitle>Blockchain transactions</CardTitle>
-                                                <CardText>No matter which compatible accessories you choose, the
-                                                    Home
-                                                    app
-                                                    makes it easy to set up and control all of them, all from one
-                                                    place.</CardText>
+                                                <CardText>Don't worry about the security of the smart house because we provide you with a strong blockchain mechanism protecting your money and devices</CardText>
                                             </CardBody>
                                         </Card>
                                     </Slide>
@@ -161,11 +153,7 @@ const Lending = (): Node => {
 
                                             <CardBody>
                                                 <CardTitle>Crypto currency</CardTitle>
-                                                <CardText>No matter which compatible accessories you choose, the
-                                                    Home
-                                                    app
-                                                    makes it easy to set up and control all of them, all from one
-                                                    place.</CardText>
+                                                <CardText>Pay for service in a reliable way and earn more cash by mining coins in our original crypto currency blockchain system</CardText>
                                             </CardBody>
                                         </Card>
                                     </Slide>

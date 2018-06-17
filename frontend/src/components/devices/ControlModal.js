@@ -39,8 +39,8 @@ class ControlModal extends Component<ControlProps & Device, ControlState> {
 
     changeSwitchDevice() {
         let {toggleSwitch} = this.props;
-        let {id} = this.props;
-        toggleSwitch(id);
+        let {id, status} = this.props;
+        toggleSwitch(id, !status);
     }
 
     changeBrightnessDevice(brightness: number) {

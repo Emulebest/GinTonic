@@ -117,7 +117,7 @@ class Header extends React.Component <HeaderProps, HeaderState> {
                                                     <NavLink tag={Link} to='/account'>My devices</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    <NavLink tag={Link} to='/history'>History</NavLink>
+                                                    <NavLink tag={Link} to='/history'>Transactions</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem divider/>
                                                 <DropdownItem>

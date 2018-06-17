@@ -10,11 +10,11 @@ import type {SwitchAction} from "../../types/devices/switch";
 import type {Device} from "../../types/devices/devices";
 import type {RequestError} from "../../types/general";
 
-export const switchDevice = (deviceId: number): SwitchAction => {
+export const switchDevice = (deviceId: number, status, pubKey, prKey): SwitchAction => {
     return {
         type: SWITCH_REQUEST,
         payload: {
-            deviceId
+            deviceId, status, pubKey, prKey
         }
     }
 };

@@ -56,8 +56,8 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
         NotificationManager.info("Every manipulation with bulbs takes money from your balance", 'Info message');
     }
 
-    toggleSwitch(deviceId: number) {
-        this.props.dispatch(switchDevice(deviceId));
+    toggleSwitch(deviceId: number, newStatus) {
+        this.props.dispatch(switchDevice(deviceId, newStatus, localStorage.publicKey, localStorage.privateKey));
     }
 
     changeBrightness(deviceId: number, brightness: number) {
