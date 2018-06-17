@@ -68,8 +68,8 @@ pub fn mine(pub_key: Json<WalletInfo>) -> Result<Json<String>> {
                     }
                 };
             },
-            Err(_) => {
-                println!("Error");
+            Err(e) => {
+                panic!(e);
             }
         }
     }
