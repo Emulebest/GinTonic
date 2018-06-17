@@ -5,8 +5,10 @@ import {
     CREATE_WALLET_FAILURE,
     GET_WALLET_FAILURE,
     GET_WALLET_SUCCESS,
-    GET_WALLET_REQUEST
+    GET_WALLET_REQUEST, SEND_MONEY_FAILURE,
+    SEND_MONEY_SUCCESS, SEND_MONEY_REQUEST
 } from "../../constants/actionTypes";
+
 
 const initialState = {
     data: {},
@@ -56,7 +58,33 @@ export default (state: InitialState = initialState, action: RegisterAction) => {
                 isFetching: false,
                 data: null
             };
+        case SEND_MONEY_REQUEST :
+            return {
+                ...state,
+                isFetching: true
+            };
+        case SEND_MONEY_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                data: sendMoney(state.data.amount, action.payload.amount),
+                message: null,
+                status: 200
+            };
+        case SEND_MONEY_FAILURE:
+            return {
+                ...state,
+                ...action.payload,
+                isFetching: false,
+                data: null
+            };
         default:
             return state;
     }
 }
+
+const sendMoney = (before, sendMoney) => {
+    return {
+        amount: before - sendMoney
+    }
+};

@@ -36,10 +36,12 @@ export default function* register({payload}: { payload: RegisterCredentials }): 
         NotificationManager.success(REGISTER_SUCCESS.description, REGISTER_SUCCESS.title, 5000);
 
         localStorage.setItem('token', user.token);
-        yield history.push("/account");
+
 
         yield put(registerSuccess(user));
         yield put(createWallerRequest());
+
+        yield history.push("/account");
 
 
     }

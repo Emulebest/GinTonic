@@ -19,6 +19,7 @@ export default function* createWallet({payload}) {
         let {pub_key, private_key, amount} = {pub_key: "Y3pcvvC70N", private_key: "pvoUGs84m4", amount: 0};
 
         localStorage.setItem('publicKey', pub_key);
+        localStorage.setItem('privateKey', private_key);
 
         yield put(createWalletSuccess(pub_key, private_key, amount));
 

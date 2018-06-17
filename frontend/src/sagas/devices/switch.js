@@ -6,6 +6,8 @@ import type {IOEffect} from 'redux-saga/effects';
 import {switchDeviceSuccess, switchDeviceFailure} from "../../actions/devices/switch";
 //import {BASE_URL} from "../../constants/baseUrl";
 
+import {sendMoneyRequest} from "../../actions/payment/sendMoney";
+
 export default function* switchDevice({payload}: { payload: { deviceId: number } }): Generator<IOEffect, void, any> {
     try {
         // const res = yield call(axios, {
@@ -18,7 +20,7 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         // });
         let device = {
             id: 1,
-            http : "",
+            http: "",
             name: "Bulb 1",
             status: false,
             place: "Kitchen",
@@ -27,6 +29,8 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         };
 
         yield put(switchDeviceSuccess(device));
+        yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", 20, localStorage.privateKey));
+
     }
     catch (error) {
         yield put(switchDeviceFailure(error));

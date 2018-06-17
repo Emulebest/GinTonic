@@ -23,7 +23,7 @@ export default function* createWallet({payload}) {
         //
         // let {amount} = res.data;
 
-        let {amount} = {amount:580}
+        let {amount} = {amount:580};
 
         yield put(getWalletSuccess(amount));
 

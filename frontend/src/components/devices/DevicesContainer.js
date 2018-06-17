@@ -7,13 +7,14 @@ import type {Node} from 'react';
 import DeviceBlock from "./Device";
 import type {Device} from "../../types/devices/devices";
 import {getDevices} from "../../actions/devices/allDevices";
+import {getWalletRequest} from "../../actions/payment/balance";
 import {switchDevice} from "../../actions/devices/switch";
 import {changeBrightness} from "../../actions/devices/brightness";
 import type{Dispatch} from "../../types/general";
 import AddModal from "./AddModal";
 import {addDevice} from "../../actions/devices/add";
 import {deleteDevice} from "../../actions/devices/delete";
-
+import {NotificationManager} from 'react-notifications';
 
 type DeviceContainerProps = {
     devices: Array<Device>,
@@ -48,8 +49,11 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
     }
 
     componentWillMount() {
+
         let userId = 1;
         this.props.dispatch(getDevices(userId));
+        this.props.dispatch(getWalletRequest(localStorage.publicKey));
+        NotificationManager.info("Every manipulation with bulbs takes money from your balance", 'Info message');
     }
 
     toggleSwitch(deviceId: number) {
@@ -108,7 +112,7 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
                             <h1>My connected devices</h1>
                         </Col>
                         <Col id="balance-tooltip" md="3">
-                            <h3  style={balanceStyle}>Balance: {amount || 0} $</h3>
+                            <h3 style={balanceStyle}>Balance: {amount || 0} $</h3>
                         </Col>
                         <Col md="1">
                             <Button

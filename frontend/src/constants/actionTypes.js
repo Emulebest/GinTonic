@@ -38,3 +38,7 @@ export const GET_WALLET_REQUEST: string = "GET_WALLET_REQUEST";
 export const GET_WALLET_SUCCESS: string = "GET_WALLET_SUCCESS";
 export const GET_WALLET_FAILURE: string = "GET_WALLET_FAILURE";
 
+export const SEND_MONEY_REQUEST: string = "SEND_MONEY_REQUEST";
+export const SEND_MONEY_SUCCESS: string = "SEND_MONEY_SUCCESS";
+export const SEND_MONEY_FAILURE: string = "SEND_MONEY_FAILURE";
+
