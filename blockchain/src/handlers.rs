@@ -21,6 +21,7 @@ pub struct DeviceT {
     pub device: String,
     pub level: String,
     pub private: String,
+    pub public: String,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
