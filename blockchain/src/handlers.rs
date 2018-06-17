@@ -17,6 +17,13 @@ pub struct WalletInfo {
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
+pub struct DeviceT {
+    pub device: String,
+    pub level: String,
+    pub private: String,
+}
+
+#[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct SendT {
     pub from: String,
     pub to: String,
@@ -105,5 +112,19 @@ pub fn transaction_history(req: HttpRequest) -> Json<HashMap<String, Vec<String>
     }
     transactions.insert("transactions".to_owned(), transaction_list);
     Json(transactions)
+}
+
+pub fn device_transaction(device: Json<DeviceT>) -> Json<HashMap<String, String>> {
+    let mut response = HashMap::new();
+    let device = device.clone();
+    let serialized = serde_json::to_string(&device).unwrap();
+    let conn = Connection::connect("postgres://postgres:123@db:5432",
+                                   TlsMode::None).unwrap();
+    conn.execute("INSERT INTO transaction (data) VALUES ($1)",
+                 &[&serialized]).unwrap();
+    conn.execute("INSERT INTO transaction_history (data) VALUES ($1)",
+                 &[&serialized]).unwrap();
+    response.insert("Status".to_owned(), "Okay".to_owned());
+    Json(response)
 }
 
