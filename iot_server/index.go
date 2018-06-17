@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
- firmataAdaptor := firmata.NewTCPAdaptor("192.168.0.253:3030")
+ firmataAdaptor := firmata.NewTCPAdaptor("192.168.0.254:3030")
  led := gpio.NewLedDriver(firmataAdaptor, "2")
 
  mbot := gobot.NewMaster()
