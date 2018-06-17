@@ -24,6 +24,12 @@ type DeviceContainerState = {
     modalAdd: boolean
 };
 
+const balanceStyle = {
+    marginTop: "10px",
+    color: "red",
+    fontWeight: "bold"
+};
+
 class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerState> {
 
     constructor(props: DeviceContainerProps) {
@@ -91,15 +97,18 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
     };
 
     render(): Node {
-        let {devices} = this.props;
+        let {devices, amount} = this.props;
         let splitDevices = (devices) ? this.divideDevices() : [];
         return (
             <Jumbotron>
 
                 <Container>
                     <Row className="row-devices">
-                        <Col md="11">
+                        <Col md="8">
                             <h1>My connected devices</h1>
+                        </Col>
+                        <Col id="balance-tooltip" md="3">
+                            <h3  style={balanceStyle}>Balance: {amount} $</h3>
                         </Col>
                         <Col md="1">
                             <Button
@@ -108,13 +117,17 @@ class DeviceContainer extends Component<DeviceContainerProps, DeviceContainerSta
                                 size="lg"
                                 className="btn-add-device"
                                 color="success">+</Button>
+
                             <AddModal
                                 addDevice={this.addDevice}
                                 isOpen={this.state.modalAdd}
                                 toggle={this.toggleAddModal}
                             />
-                            <UncontrolledTooltip placement="left" target="add-tooltip">
+                            <UncontrolledTooltip placement="bottom" target="add-tooltip">
                                 Add new device to your collection
+                            </UncontrolledTooltip>
+                            <UncontrolledTooltip placement="top" target="balance-tooltip">
+                                You current balance
                             </UncontrolledTooltip>
                         </Col>
 

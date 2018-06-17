@@ -4,6 +4,7 @@ import {put, call} from 'redux-saga/effects';
 import type {IOEffect} from 'redux-saga/effects';
 import axios from "axios";
 import {registerSuccess, registerFailure} from "../../actions/auth/register";
+import {createWallerRequest} from "../../actions/payment/wallet";
 import {BASE_URL} from "../../constants/baseUrl";
 
 import type {RegisterCredentials} from "../../types/auth/register";
@@ -35,6 +36,7 @@ export default function* register({payload}: { payload: RegisterCredentials }): 
         NotificationManager.success(REGISTER_SUCCESS.description, REGISTER_SUCCESS.title, 5000);
 
         yield put(registerSuccess(user));
+        yield put(createWallerRequest());
 
         localStorage.setItem('token', user.token);
         yield history.push("/account");

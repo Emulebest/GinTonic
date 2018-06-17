@@ -6,12 +6,14 @@ import {routerReducer} from "react-router-redux"
 
 import authReducer from "./auth";
 import deviceReducer from "./devices";
+import paymentReducer from "./payment";
 
 const rootReducer = combineReducers({
     auth: authReducer,
     routing: routerReducer,
     form: formReducer,
-    devices: deviceReducer
+    devices: deviceReducer,
+    payment: paymentReducer
 });
 
 

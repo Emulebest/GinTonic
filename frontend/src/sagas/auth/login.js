@@ -9,6 +9,8 @@ import type{LoginResponseSuccess} from "../../types/auth/login";
 import {NotificationManager} from "react-notifications";
 import {LOGIN_SUCCESS} from "../../constants/errors";
 
+import {getWalletRequest} from "../../actions/payment/balance";
+
 export default function* login({payload}: { payload: { email: string, password: string } }): Generator<IOEffect, void, any> {
     try {
         const res = yield call(axios, {
@@ -20,8 +22,12 @@ export default function* login({payload}: { payload: { email: string, password: 
                 "Content-Type": "application/json"
             }
         });
+
         let {user}: LoginResponseSuccess = res.data;
         yield put(loginSuccess(user.token, user));
+
+        yield put(getWalletRequest("N8QowfrX6p"));
+
         localStorage.setItem('token', user.token);
 
         NotificationManager.success(LOGIN_SUCCESS.description, LOGIN_SUCCESS.title, 5000);

@@ -6,7 +6,8 @@ import {withRouter} from 'react-router'
 import DevicesContainer from "../components/devices/DevicesContainer";
 
 const mapStateToProps = (state) => ({
-    devices: state.devices.data.devices
+    devices: state.devices.data.devices,
+    amount : state.payment.wallet.data.amount
 });
 
 
