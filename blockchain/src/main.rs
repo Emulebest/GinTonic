@@ -1,7 +1,6 @@
 mod tests;
 mod block;
 mod transaction_types;
-mod transaction_processor;
 mod handlers;
 mod processor;
 mod wallets;
@@ -12,6 +11,7 @@ extern crate actix;
 extern crate actix_web;
 extern crate futures;
 extern crate postgres;
+extern crate reqwest;
 
 use std::thread;
 use actix_web::{server, App, http};
@@ -69,7 +69,7 @@ fn main() {
                 .configure(|app| {
                     Cors::for_app(app)
                         .allowed_origin("*")
-                        .resource("/", |r| r.method(http::Method::GET).with(device_transaction))
+                        .resource("/", |r| r.method(http::Method::POST).with(device_transaction))
                         .register()
                 }),
         ])
