@@ -28,7 +28,7 @@ fn main() {
                 .prefix("/send")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::POST).with(transaction_send))
                         .register()
                 }),
@@ -36,7 +36,7 @@ fn main() {
                 .prefix("/wallet_create")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::GET).f(create_wallet))
                         .register()
                 }),
@@ -44,7 +44,7 @@ fn main() {
                 .prefix("/mine")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::POST).with(mine))
                         .register()
                 }),
@@ -52,7 +52,7 @@ fn main() {
                 .prefix("/balance")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::POST).with(get_amount))
                         .register()
                 }),
@@ -60,7 +60,7 @@ fn main() {
                 .prefix("/history")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::GET).with(transaction_history))
                         .register()
                 }),
@@ -68,7 +68,7 @@ fn main() {
                 .prefix("/device")
                 .configure(|app| {
                     Cors::for_app(app)
-                        .allowed_origin("*")
+                        .send_wildcard()
                         .resource("/", |r| r.method(http::Method::POST).with(device_transaction))
                         .register()
                 }),
