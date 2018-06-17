@@ -4,27 +4,24 @@ import {BLOCKCHAIN_URL} from "../../constants/baseUrl";
 
 import {getWalletSuccess, getWalletFailure} from "../../actions/payment/balance";
 
-export default function* createWallet({payload}) {
+export default function* getBalance({payload}) {
     try {
 
         let data = JSON.stringify({
             address: payload.pubKey
         });
 
-        // const res = yield call(axios, {
-        //     url: `${BLOCKCHAIN_URL}/balance`,
-        //     method: "POST",
-        //     data,
-        //     headers: {
-        //         "Accept": "application/json",
-        //         "Content-Type": "application/json"
-        //     }
-        // });
-        //
-        // let {amount} = res.data;
+        const res = yield call(axios, {
+            url: `${BLOCKCHAIN_URL}/balance`,
+            method: "POST",
+            data,
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        });
 
-        let {amount} = {amount:580};
-
+        let {amount} = res.data;
         yield put(getWalletSuccess(amount));
 
     }

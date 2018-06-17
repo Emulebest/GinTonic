@@ -35,12 +35,13 @@ class History extends React.Component {
                             <tbody>
                             {
                                 transactions.map((item, i) => {
+                                    let trans = JSON.parse(item);
                                     return (
                                         <tr>
                                             <th scope="row">{i + 1}</th>
-                                            <td>{item.from}</td>
-                                            <td>{item.to}</td>
-                                            <td>{item.amount}</td>
+                                            <td>{trans.from}</td>
+                                            <td>{trans.to}</td>
+                                            <td>{trans.amount}</td>
                                         </tr>
                                     )
                                 })

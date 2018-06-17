@@ -29,7 +29,7 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
         };
 
         yield put(switchDeviceSuccess(device));
-        yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", 20, localStorage.privateKey));
+        yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", "20", localStorage.privateKey));
 
     }
     catch (error) {

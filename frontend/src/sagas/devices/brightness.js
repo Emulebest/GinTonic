@@ -26,9 +26,9 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
             brightness: payload.brightness,
             description: "And produce say the ten moments parties. Simple innate summer fat appear basket his desire joy. Outward clothes promise at gravity do excited. Sufficient particular impossible by reasonable oh expression is."
         };
-        console.log("ok");
+
         yield put(changeBrightnessSuccess(device));
-        yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", 5, localStorage.privateKey));
+        yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", "5", localStorage.privateKey));
 
     }
     catch (error) {

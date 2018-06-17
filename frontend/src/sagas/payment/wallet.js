@@ -5,24 +5,21 @@ import {createWalletSuccess, createWalletFailure} from "../../actions/payment/wa
 
 export default function* createWallet({payload}) {
     try {
-        // const res = yield call(axios, {
-        //     url: `${BLOCKCHAIN_URL}/wallet_create`,
-        //     method: "GET",
-        //     headers: {
-        //         "Accept": "application/json",
-        //         "Content-Type": "application/json"
-        //     }
-        // });
+        const res = yield call(axios, {
+            url: `${BLOCKCHAIN_URL}/wallet_create`,
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        });
 
-        //let {pub_key, private_key, amount} = res.data;
-
-        let {pub_key, private_key, amount} = {pub_key: "Y3pcvvC70N", private_key: "pvoUGs84m4", amount: 0};
+        let {pub_key, private_key, amount} = res.data;
 
         localStorage.setItem('publicKey', pub_key);
         localStorage.setItem('privateKey', private_key);
 
         yield put(createWalletSuccess(pub_key, private_key, amount));
-
 
     }
     catch (error) {

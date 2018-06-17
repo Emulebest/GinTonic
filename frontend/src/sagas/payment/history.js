@@ -17,22 +17,8 @@ export default function* getHistoryTransactions({payload}) {
             }
         });
 
-
-        // let res = {
-        //     "transactions": [{
-        //         "from": "N8QowfrX6p",
-        //         "to": "C9DpZPLMbW",
-        //         "amount": "20",
-        //         "private": "ab"
-        //     }, {"from": "N8QowfrX6p", "to": "C9DpZPLMbW", "amount": "20", "private": "ab"}, {
-        //         "from": "N8QowfrX6p",
-        //         "to": "C9DpZPLMbW",
-        //         "amount": "20",
-        //         "private": "ab"
-        //     }, {"from": "N8QowfrX6p", "to": "C9DpZPLMbW", "amount": "20", "private": "ab"}]
-        // };
-
-        yield put(getHistorySuccess(res.transactions));
+        let {transactions} = res.data;
+        yield put(getHistorySuccess(transactions));
 
     }
     catch (error) {
