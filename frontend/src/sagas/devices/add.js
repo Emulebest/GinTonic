@@ -17,14 +17,19 @@ export default function* changeBrightness({payload}: { payload: { device: Device
         //         'content-type': 'application/json',
         //     }
         // });
-        let device =  {
-            id: 6,
-            name: "Bulb 6",
-            http : "http://10.0.75.1:3000",
+
+        let {name, description, place, http} = payload.device;
+
+        let device = {
+            id: Date.now(),
+            name: name,
+            http,
             status: false,
-            place: "Bathroom",
+            place: place,
             brightness: 0,
-            description: "Note that the development build is not optimized. To create a production build, use npm run build."};
+            description: description
+        };
+
         yield put(addDeviceSuccess(device));
     }
     catch (error) {

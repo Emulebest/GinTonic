@@ -9,7 +9,7 @@ import {places} from "../../utils/places";
 import "../../style/AddForm.css";
 
 let AddForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting} = props;
+    const {handleSubmit, pristine, submitting} = props;
     return (
         <React.Fragment>
             <Form onSubmit={handleSubmit}>

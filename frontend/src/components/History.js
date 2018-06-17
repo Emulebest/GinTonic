@@ -1,6 +1,6 @@
 import React from 'react';
 import {getHistory} from "../actions/transactions/history";
-import {Container, Row, Jumbotron, Button, Col, UncontrolledTooltip, Table} from "reactstrap";
+import {Container, Row, Jumbotron, Col,Table} from "reactstrap";
 import {NotificationManager} from "react-notifications";
 
 class History extends React.Component {

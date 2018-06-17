@@ -28,10 +28,6 @@ import {Element} from 'react-scroll';
 
 const Lending = (): Node => {
 
-    const notify = () => {
-        console.log('here');
-
-    };
 
     return (
         <React.Fragment>

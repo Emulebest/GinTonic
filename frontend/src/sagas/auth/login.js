@@ -9,8 +9,6 @@ import type{LoginResponseSuccess} from "../../types/auth/login";
 import {NotificationManager} from "react-notifications";
 import {LOGIN_SUCCESS} from "../../constants/errors";
 
-import {getWalletRequest} from "../../actions/payment/balance";
-
 export default function* login({payload}: { payload: { email: string, password: string } }): Generator<IOEffect, void, any> {
     try {
         const res = yield call(axios, {

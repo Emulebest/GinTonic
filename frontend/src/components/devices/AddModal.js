@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import type {Node} from 'react';
 import type {Device} from "../../types/devices/devices";
 import AddForm from "./AddForm";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 type AddProps = {
     isOpen: boolean,

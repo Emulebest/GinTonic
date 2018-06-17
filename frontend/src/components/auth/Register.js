@@ -24,9 +24,9 @@ class Register extends Component<RegisterProps> {
 
     showError = (): ?Node => {
         let {status, message} = this.props;
-        (status >= 300) ?
-            NotificationManager.error(message, REGISTER_ERROR.title, 5000) :
-            null;
+        if (status >= 300) {
+            NotificationManager.error(message, REGISTER_ERROR.title, 5000)
+        }
     };
 
     handleRegister = ({email, password, confirmPassword, userName}: RegisterCredentials) => {

@@ -16,8 +16,8 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
         //         'content-type': 'application/json',
         //     }
         // });
-        let deviceId = 2;
-        yield put(deleteDeviceSuccess(deviceId));
+
+        yield put(deleteDeviceSuccess(payload.deviceId));
     }
     catch (error) {
         yield put(deleteDeviceFailure(error));

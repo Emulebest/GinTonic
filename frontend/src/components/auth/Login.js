@@ -26,9 +26,9 @@ class Login extends Component<LoginProps> {
 
     showError = (): ?Node => {
         let {status, message} = this.props;
-        (status >= 300) ?
-            NotificationManager.error(message, LOGIN_ERROR.title, 5000) :
-            null;
+        if (status >= 300) {
+            NotificationManager.error(message, LOGIN_ERROR.title, 5000)
+        }
     };
 
     handleLogin = ({email, password}: LoginCredentials) => {
