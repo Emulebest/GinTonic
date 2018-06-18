@@ -29,6 +29,8 @@ class History extends React.Component {
                                 <th>#</th>
                                 <th>From</th>
                                 <th>To</th>
+                                <th>Device</th>
+                                <th>Level</th>
                                 <th>Amount</th>
                             </tr>
                             </thead>
@@ -41,6 +43,8 @@ class History extends React.Component {
                                             <th scope="row">{i + 1}</th>
                                             <td>{trans.from}</td>
                                             <td>{trans.to}</td>
+                                            <td>{trans.device}</td>
+                                            <td>{trans.level}</td>
                                             <td>{trans.amount}</td>
                                         </tr>
                                     )
