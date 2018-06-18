@@ -7,6 +7,7 @@ import {switchDeviceSuccess, switchDeviceFailure} from "../../actions/devices/sw
 import {BLOCKCHAIN_URL} from "../../constants/baseUrl";
 
 import {sendMoneyRequest} from "../../actions/payment/sendMoney";
+import {mineRequest} from "../../actions/transactions/mine";
 
 export default function* switchDevice({payload}: { payload: { deviceId: number } }): Generator<IOEffect, void, any> {
     try {
@@ -17,7 +18,7 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
             device: "gdfgdf",
             public: pubKey,
             private: prKey,
-            level: (status)? "1" : "0"
+            level: (status) ? "1" : "0"
         });
 
         const res = yield call(axios, {
@@ -41,7 +42,7 @@ export default function* switchDevice({payload}: { payload: { deviceId: number }
 
         yield put(switchDeviceSuccess(device));
         yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", "20", localStorage.privateKey));
-
+        yield put(mineRequest(localStorage.publicKey));
     }
     catch (error) {
         yield put(switchDeviceFailure(error));

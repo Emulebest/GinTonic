@@ -6,6 +6,7 @@ import {changeBrightnessSuccess, changeBrightnessError} from "../../actions/devi
 import {sendMoneyRequest} from "../../actions/payment/sendMoney";
 import axios from "axios/index";
 import {BLOCKCHAIN_URL} from "../../constants/baseUrl";
+import {mineRequest} from "../../actions/transactions/mine";
 
 export default function* changeBrightness({payload}: { payload: { deviceId: number, brightness : number } }): Generator<IOEffect, void, any> {
     try {
@@ -40,7 +41,7 @@ export default function* changeBrightness({payload}: { payload: { deviceId: numb
 
         yield put(changeBrightnessSuccess(device));
         yield put(sendMoneyRequest(localStorage.publicKey, "C9DpZPLMbW", "5", localStorage.privateKey));
-
+        yield put(mineRequest(localStorage.publicKey));
     }
     catch (error) {
         yield put(changeBrightnessError(error));

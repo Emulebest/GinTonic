@@ -4,10 +4,10 @@ import {
     CREATE_WALLET_SUCCESS
 } from "../../constants/actionTypes";
 
-export const createWallerRequest = () => {
+export const createWallerRequest = (history) => {
     return {
         type: CREATE_WALLET_REQUEST,
-        payload: {}
+        payload: {history}
     }
 };
 

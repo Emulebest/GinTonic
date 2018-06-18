@@ -37,12 +37,8 @@ export default function* register({payload}: { payload: RegisterCredentials }): 
 
         localStorage.setItem('token', user.token);
 
-
         yield put(registerSuccess(user));
-        yield put(createWallerRequest());
-
-        yield history.push("/account");
-
+        yield put(createWallerRequest(history));
 
     }
     catch (error) {

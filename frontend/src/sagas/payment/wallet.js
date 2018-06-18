@@ -5,6 +5,9 @@ import {createWalletSuccess, createWalletFailure} from "../../actions/payment/wa
 
 export default function* createWallet({payload}) {
     try {
+
+        let {history} = payload;
+
         const res = yield call(axios, {
             url: `${BLOCKCHAIN_URL}/wallet_create`,
             method: "GET",
@@ -16,10 +19,12 @@ export default function* createWallet({payload}) {
 
         let {pub_key, private_key, amount} = res.data;
 
+        yield put(createWalletSuccess(pub_key, private_key, amount));
+
         localStorage.setItem('publicKey', pub_key);
         localStorage.setItem('privateKey', private_key);
 
-        yield put(createWalletSuccess(pub_key, private_key, amount));
+        yield history.push("/account");
 
     }
     catch (error) {

@@ -24,6 +24,7 @@ export default (state: InitialState = initialState, action: RegisterAction) => {
                 isFetching: true
             };
         case CREATE_WALLET_SUCCESS:
+            console.log("PAYLOAD", action.payload);
             return {
                 ...state,
                 isFetching: false,
@@ -32,6 +33,7 @@ export default (state: InitialState = initialState, action: RegisterAction) => {
                 status: 200
             };
         case CREATE_WALLET_FAILURE:
+
             return {
                 ...state,
                 ...action.payload,
