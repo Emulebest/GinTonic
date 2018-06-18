@@ -12,8 +12,6 @@ export default function* mine({payload}) {
         });
 
 
-        console.log("hello")
-
         const res = yield call(axios, {
             url: `${BLOCKCHAIN_URL}/mine`,
             method: "POST",
@@ -23,9 +21,6 @@ export default function* mine({payload}) {
                 "Content-Type": "application/json"
             }
         });
-
-        console.log("HE:LLLD", res);
-
 
         let mes = "All transactions Okay";
 

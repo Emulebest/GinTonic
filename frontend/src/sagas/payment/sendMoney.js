@@ -15,21 +15,20 @@ export default function* sendMoney({payload}) {
             from, to, amount, private : prKey
         });
 
-        const res = yield call(axios, {
-            url: `${BLOCKCHAIN_URL}/send`,
-            method: "POST",
-            data,
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        });
+        // const res = yield call(axios, {
+        //     url: `${BLOCKCHAIN_URL}/send`,
+        //     method: "POST",
+        //     data,
+        //     headers: {
+        //         "Accept": "application/json",
+        //         "Content-Type": "application/json"
+        //     }
+        // });
 
-        let money = JSON.parse(res.data).amount;
 
         NotificationManager.info(`Minus ${amount} from your balance`, "Balance", 5000);
 
-        yield put(sendMoneySuccess(money));
+        yield put(sendMoneySuccess(amount));
 
     }
     catch (error) {
